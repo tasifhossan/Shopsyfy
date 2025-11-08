@@ -1,0 +1,120 @@
+let userCredentials = {};
+async function getProfile() {
+  userCredentials = JSON.parse(localStorage.getItem("userProfile")) || {};
+  return userCredentials;
+}
+getProfile();
+
+function profileRender() {
+  const sidebarLinks = document.querySelectorAll(".sidebar-link");
+  const sections = document.querySelectorAll('[id^="section-"]');
+
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      sidebarLinks.forEach((l) => l.classList.remove("active-link"));
+      link.classList.add("active-link");
+      const sectionId = link.dataset.section;
+      sections.forEach((sec) => sec.classList.add("hidden"));
+      document
+        .getElementById(`section-${sectionId}`)
+        .classList.remove("hidden");
+    });
+  });
+  const profileAvatar = document.getElementById("profileAvatar");
+  const uploadAvatar = document.getElementById("uploadAvatar");
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const address = document.getElementById("address");
+  const city = document.getElementById("city");
+  const zip = document.getElementById("zip");
+  const country = document.getElementById("country");
+  const password = document.getElementById("password");
+  const saveChangesBtn = document.getElementById("saveChanges");
+  const balance = document.getElementById("balance");
+  //   const paymentMethod = document.getElementById("paymentMethod");
+  //   const cardNumber = document.getElementById("cardNumber");
+  //   const expiryDate = document.getElementById("expiryDate");
+  //   const cvv = document.getElementById("cvv");
+  //   const savePaymentInfo = document.getElementById("savePaymentInfo");
+  //   const orderList = document.getElementById("orderList");
+  const alertBox = document.createElement("p");
+  alertBox.id = "alertBox";
+  alertBox.className = "text-center mt-6 text-sm hidden";
+  document.querySelector("#section-account").appendChild(alertBox);
+
+  function showAlert(msg, success = false) {
+    alertBox.textContent = msg;
+    alertBox.classList.remove("hidden", "text-red-500", "text-green-600");
+    alertBox.classList.add(success ? "text-green-600" : "text-red-500");
+    setTimeout(() => alertBox.classList.add("hidden"), 2500);
+  }
+  const storedProfile = userCredentials;
+
+  const userData = {
+    fname: storedProfile.fname || "",
+    lname: storedProfile.lname || "",
+    email: storedProfile.email || "",
+    password: storedProfile.password || "",
+    phone: storedProfile.phone || "",
+    address: storedProfile.address || "",
+    city: storedProfile.city || "",
+    postal: storedProfile.postal || "",
+    country: storedProfile.country || "",
+    balance: storedProfile.balance || "",
+  };
+
+  if (userData.email == "" && userData.password == "") {
+    showAlert("INVALID CREDENTIAL, REDIRECTING....");
+    setTimeout(() => {
+      window.location.href = "./login.html";
+    }, 3000);
+  }
+  firstName.value = userData.fname;
+  lastName.value = userData.lname;
+  email.value = userData.email;
+  phone.value = userData.phone;
+  address.value = userData.address;
+  city.value = userData.city;
+  zip.value = userData.postal;
+  password.value = userData.password;
+  country.value = userData.country;
+  balance.value = userData.balance;
+  document.getElementById("profileNameText").innerText = `${
+    userData.fname || "John"
+  } ${userData.lname || "Doe"}`;
+  document.getElementById("profileEmailText").innerText =
+    userData.email || "johndoe@gmail.com";
+  saveChangesBtn.addEventListener("click", () => {
+    const updatedData = {
+      fname: firstName.value.trim(),
+      lname: lastName.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim(),
+      address: address.value.trim(),
+      city: city.value.trim(),
+      postal: zip.value.trim(),
+      country: country.value.trim(),
+      password: password.value.trim(),
+      balance: balance.value.trim(),
+    };
+    localStorage.setItem("userProfile", JSON.stringify(updatedData));
+    showAlert("✅ Profile updated successfully!", true);
+    document.getElementById(
+      "profileNameText"
+    ).innerText = `${updatedData.fname} ${updatedData.lname}`;
+    document.getElementById("profileEmailText").innerText = updatedData.email;
+  });
+}
+
+document.getElementById("logout").addEventListener("click", (e) => {
+  logout();
+});
+
+function logout() {
+  userCredentials = {};
+  localStorage.setItem("userProfile", JSON.stringify({}));
+
+  window.location.href = "./login.html";
+}

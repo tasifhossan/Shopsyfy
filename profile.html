@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile | Shopsyfy</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        '323232': '#323232',
+                        'bc8246': '#bc8246',
+                        'f5f5f5': '#f5f5f5'
+                    },
+                    fontFamily: {
+                        jakarta: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        body {
+      @apply font-jakarta bg-[#f5f5f5] text-[#444];
+    }
+
+    .os-btn {
+      @apply relative uppercase text-[12px] font-semibold h-[50px] px-10 border-2 border-[#323232] text-[#323232] bg-white 
+      flex items-center justify-center rounded-md transition-all duration-300;
+    }
+
+    .os-btn:hover {
+      @apply bg-[#bc8246] text-white border-[#bc8246];
+    }
+
+    .profile-card {
+      @apply bg-white rounded-2xl shadow-lg p-8 md:p-10;
+    }
+
+    .input-line {
+      @apply w-full border-b border-gray-300 py-3 text-[#323232] text-[15px] bg-transparent focus:outline-none focus:border-[#bc8246] placeholder:text-gray-400;
+    }
+
+    .profile-section-title {
+      @apply text-2xl font-semibold text-[#323232] mb-8 border-b pb-4;
+    }
+
+    .sidebar-link {
+      @apply flex items-center gap-3 py-2 text-sm text-[#444] hover:text-[#bc8246] transition-all duration-300 cursor-pointer;
+    }
+
+    .active-link {
+      @apply text-[#bc8246] font-semibold;
+    }
+  </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="bg-[#f5f5f5] border-b border-gray-200 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html">
+                <img src="assets/img/logo/logo.png" alt="logo" class="h-10" />
+            </a>
+            <a href="index.html" class="os-btn">Back to Shop</a>
+        </div>
+    </header>
+
+    <!-- Main Profile Section -->
+    <main class="py-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+            <!-- Sidebar -->
+            <aside class="profile-card text-center flex flex-col items-center">
+                <div class="relative">
+                    <img id="profileAvatar" src="https://i.pravatar.cc/150?img=12"
+                        class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-white" alt="User Avatar" />
+                    <input id="uploadAvatar" type="file" accept="image/*" class="hidden" />
+                    <label for="uploadAvatar"
+                        class="absolute bottom-0 right-0 bg-[#bc8246] text-white rounded-full p-2 shadow cursor-pointer hover:bg-[#323232] transition">
+                        <i class="fa-solid fa-camera text-xs"></i>
+                    </label>
+                </div>
+                <h2 class="mt-5 text-2xl font-semibold text-[#323232]" id="profileNameText">John Doe</h2>
+                <p class="text-gray-500 text-sm" id="profileEmailText">johndoe@gmail.com</p>
+
+                <div class="w-full mt-8 border-t border-gray-200 pt-6 text-left space-y-2">
+                    <h3 class="text-[#323232] font-semibold mb-4">My Dashboard</h3>
+                    <ul>
+                        <li>
+                            <div class="sidebar-link active-link" data-section="account"><i
+                                    class="fa-solid fa-user"></i>Account Info</div>
+                        </li>
+                        <li>
+                            <div class="sidebar-link" data-section="orders"><i class="fa-solid fa-box"></i>My Orders
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sidebar-link" data-section="wishlist"><i class="fa-solid fa-heart"></i>Wishlist
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sidebar-link" data-section="payment"><i
+                                    class="fa-solid fa-credit-card"></i>Payment Info</div>
+                        </li>
+                        <li><button id="logout" class="sidebar-link text-red-500 hover:text-[#bc8246]"><i
+                                    class="fa-solid fa-right-from-bracket"></i>Logout</button></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <section class="lg:col-span-2 space-y-12">
+
+                <!-- Account Info -->
+                <div id="section-account" class="profile-card">
+                    <h3 class="profile-section-title">Account Information</h3>
+                    <form id="accountForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">First Name</label>
+                            <input id="firstName" type="text" class="input-line" placeholder="John" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Last Name</label>
+                            <input id="lastName" type="text" class="input-line" placeholder="Doe" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Email</label>
+                            <input id="email" type="email" class="input-line" placeholder="johndoe@gmail.com" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Phone</label>
+                            <input id="phone" type="text" class="input-line bg-gray-100" value="" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-gray-500 mb-1">Address</label>
+                            <input id="address" type="text" class="input-line"
+                                placeholder="4321 Bali Arcade, Chokbazar, Chittagong, Bangladesh." />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">City</label>
+                            <input id="city" type="text" class="input-line" placeholder="Dhaka" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Postal Code</label>
+                            <input id="zip" type="text" class="input-line" placeholder="1207" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Country</label>
+                            <input id="country" type="text" class="input-line" placeholder="Bangladesh" />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Password</label>
+                            <input id="password" type="password" class="input-line bg-gray-100 cursor-not-allowed"
+                                value="" disabled />
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Balance</label>
+                            <input id="balance" type="number" class="input-line bg-gray-100 cursor-not-allowed" value=""
+                                disabled />
+                        </div>
+                    </form>
+                    <div class="text-center mt-8">
+                        <button id="saveChanges" class="os-btn">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- My Orders -->
+                <div id="section-orders" class="profile-card hidden">
+                    <h3 class="profile-section-title">My Orders</h3>
+                    <div id="orderList" class="space-y-4"></div>
+                </div>
+
+                <!-- Wishlist -->
+                <div id="section-wishlist" class="profile-card hidden">
+                    <h3 class="profile-section-title">Wishlist</h3>
+                    <div id="wishlistItems" class="space-y-4 text-gray-500">Your wishlist is currently empty.</div>
+                </div>
+
+                <!-- Payment Info -->
+                <div id="section-payment" class="profile-card hidden">
+                    <h3 class="profile-section-title">Payment Information</h3>
+                    <form id="paymentForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Payment Method</label>
+                            <select id="paymentMethod" class="input-line">
+                                <option>Credit / Debit Card</option>
+                                <option>Bkash</option>
+                                <option>Nagad</option>
+                                <option>Cash on Delivery</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-500 mb-1">Card Number</label>
+                            <input id="cardNumber" type="text" class="input-line" placeholder="•••• •••• •••• 1234" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-500 mb-1">Expiry Date</label>
+                                <input id="expiryDate" type="text" class="input-line" placeholder="MM/YY" />
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-500 mb-1">CVV</label>
+                                <input id="cvv" type="text" class="input-line" placeholder="•••" />
+                            </div>
+                        </div>
+                        <button type="button" id="savePaymentInfo" class="os-btn mt-4">Save Payment Info</button>
+                    </form>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#323232] text-gray-400 py-8 mt-10 text-center">
+        <p>© 2025 Shopsyfy — Designed by <span class="text-[#bc8246]">Meheraj & Tasif</span></p>
+    </footer>
+    <script src="assets/js/profile.js"></script>
+    <script>
+        profileRender()
+    </script>
+    <!-- <script>
+       
+
+
+        const orders = [{
+                id: 'ORD-001',
+                date: '2025-10-05',
+                status: 'Delivered',
+                total: '$120.00'
+            },
+            {
+                id: 'ORD-002',
+                date: '2025-11-02',
+                status: 'Processing',
+                total: '$65.00'
+            },
+            {
+                id: 'ORD-003',
+                date: '2025-11-06',
+                status: 'Cancelled',
+                total: '$30.00'
+            }
+        ];
+
+        orders.forEach(order => {
+            const div = document.createElement('div');
+            div.className =
+                'p-4 border border-gray-200 rounded-lg flex justify-between items-center hover:bg-gray-50 transition';
+            div.innerHTML = `
+      <div>
+        <p class="font-semibold text-[#323232]">#${order.id}</p>
+        <p class="text-sm text-gray-500">${order.date}</p>
+      </div>
+      <div class="text-right">
+        <span class="text-[#bc8246] font-medium">${order.status}</span>
+        <p class="font-semibold">${order.total}</p>
+      </div>`;
+            orderList.appendChild(div);
+        });
+
+        // Save Payment Info
+        savePaymentInfo.addEventListener('click', () => {
+            const paymentData = {
+                method: paymentMethod.value,
+                card: cardNumber.value.trim(),
+                expiry: expiryDate.value.trim(),
+                cvv: cvv.value.trim()
+            };
+            localStorage.setItem('paymentInfo', JSON.stringify(paymentData));
+            showAlert('💳 Payment information saved!', true);
+        });
+    </script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Shopsyfy</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bc8246': '#bc8246',
+                        '323232': '#323232',
+                        'f5f5f5': '#f5f5f5'
+                    },
+                    fontFamily: {
+                        jakarta: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        body {
+      @apply font-jakarta bg-gradient-to-br from-[#f5f5f5] to-[#e7e7e7] flex items-center justify-center min-h-screen;
+    }
+
+    .login-wrapper {
+      @apply relative w-full max-w-sm px-8 py-10 bg-white/70 backdrop-blur-lg shadow-2xl rounded-3xl flex flex-col items-center border border-white/50;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-input {
+      @apply w-full border-b border-gray-300 py-3 text-[15px] bg-transparent focus:outline-none placeholder:text-gray-400 transition-all duration-300 px-3;
+    }
+
+    .login-input:focus {
+      @apply border-[#bc8246];
+    }
+
+    .os-btn {
+      @apply w-full mt-8 uppercase text-[13px] font-semibold h-[48px] border-2 border-[#323232] text-[#323232] bg-white rounded-xl 
+      flex items-center justify-center transition-all duration-300 shadow-sm;
+    }
+
+    .os-btn:hover {
+      @apply bg-[#bc8246] text-white border-[#bc8246] shadow-md;
+    }
+
+    .floating-logo {
+      @apply h-12 mb-8 select-none;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .footer-text {
+      @apply text-sm text-gray-500 mt-6;
+    }
+
+    .footer-text a {
+      @apply text-[#bc8246] hover:underline font-medium;
+    }
+
+    /* Subtle Input Underline Animation */
+    .input-container {
+      @apply relative;
+    }
+
+    .input-line {
+      @apply absolute bottom-0 left-0 h-[2px] bg-[#bc8246] w-0 transition-all duration-300;
+    }
+
+    input:focus + .input-line {
+      width: 100%;
+    }
+
+    /* Error Message Styling */
+    .error-message {
+      @apply text-red-500 text-sm text-center mt-4 hidden opacity-0 transition-opacity duration-300;
+    }
+
+    .error-visible {
+      @apply block opacity-100;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+        <img src="assets/img/logo/logo.png" alt="Shopsyfy Logo" class="floating-logo" />
+
+        <form id="loginForm" class="w-full space-y-8">
+            <!-- Email -->
+            <div class="input-container">
+                <input id="loginEmail" type="email" class="login-input" placeholder="Email address" required />
+                <span class="input-line"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="input-container">
+                <input id="loginPassword" type="password" class="login-input" placeholder="Password" required />
+                <span class="input-line"></span>
+            </div>
+
+            <!-- Button -->
+            <button id="loginBtn" type="submit" class="os-btn">Login</button>
+        </form>
+
+        <!-- Inline Error Message -->
+        <p id="errorMessage" class="error-message"></p>
+
+        <p class="footer-text">
+            Don’t have an account?
+            <a href="#">Sign up</a>
+        </p>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.classList.add('error-visible');
+        }
+
+        function clearError() {
+            errorMessage.textContent = '';
+            errorMessage.classList.remove('error-visible');
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearError();
+
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value.trim();
+
+            if (!email || !password) {
+                showError('⚠️ Please enter both email and password.');
+                return;
+            }
+
+            const storedProfile = JSON.parse(localStorage.getItem('userProfile'));
+            if (storedProfile && storedProfile.email === email && storedProfile.password == password) {
+                showError('✅ Login successful! Redirecting...');
+                errorMessage.classList.remove('text-red-500');
+                errorMessage.classList.add('text-green-600');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                localStorage.setItem('userProfile', JSON.stringify({
+                    email: email,
+                    password: password,
+                    fname: '',
+                    lname: '',
+                    phone: '',
+                    address: '',
+                    city: '',
+                    postal: '',
+                    country: '',
+                    balance: 1000
+                }))
+                showError('✅ Account created! Redirecting to profile...');
+                setTimeout(() => {
+                    window.location.href = 'profile.html';
+                }, 1000);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

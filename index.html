@@ -1,0 +1,1629 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shopsyfy</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/fontAwesome5Pro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'f5f5f5': '#f5f5f5',
+                        '323232': '#323232',
+                        '444': '#444444',
+                        'bc8246': '#bc8246',
+                        'c2c2c2': '#c2c2c2',
+                        '8a8f6a': '#8a8f6a',
+                        'ebebeb': '#ebebeb',
+                    },
+                    height: {
+                        'hero-xs': '550px',
+                        'hero-sm': '600px',
+                        'hero-md': '650px',
+                        'hero-lg': '700px',
+                        'hero-xl': '750px',
+                        'hero-2xl': '925px',
+                    },
+                    screens: {
+                        'sm': '576px',
+                        'md': '768px',
+                        'lg': '1024px',
+                    },
+                }
+            }
+        }
+    </script>
+
+
+    <style type="text/tailwindcss">
+        .blog_post{
+            @apply text-white;
+        }
+        .title{
+            @apply text-[2.2rem] text-[#323232];
+        }
+        .desc{
+            @apply px-10 text-[15px];
+        }
+        .os-btn {
+            @apply self-center px-2 py-3 border-2 text-[15px]
+                border-[#323232] text-[#323232] bg-white
+                transition-colors duration-300
+                hover:text-white hover:border-[#bc8246] hover:bg-[#bc8246];
+        }
+        .os-btn-3{
+            @apply w-1/4
+        }
+        .blog__item{
+        @apply flex flex-col select-none ;
+        }
+        .blog__thumb{
+            @apply w-full h-auto;
+        }
+        .blog__content{
+            @apply text-[1.3rem] text-[#00000083] mt-4 w-full h-auto;
+        }
+        .blog__meta{
+            @apply text-[0.8rem] py-2;
+        }
+        .blog__content p{
+                @apply text-[0.8rem] pb-5
+        }
+        .blog__content h4,.blog__content .os-btn{
+            @apply text-black
+        }
+        .blog__content .os-btn{
+            @apply border-neutral-300 hover:border-0 uppercase text-[12px]
+        }
+
+        .product__thumb-2{
+            @apply hidden
+        }
+
+        
+        .product__thumb{
+        @apply relative overflow-visible visible;
+        }
+
+    .sale__item .product__thumb img {
+    @apply block w-full h-[344px] transition-all duration-500 ease-in-out;
+    }
+
+    .sale__item .product__thumb .product__thumb-2 {
+    @apply hidden absolute top-0 left-0;
+    }
+
+    .sale__item:hover .product__thumb img:first-child {
+    @apply hidden;
+    }
+
+    .sale__item:hover .add-cart{
+        @apply block;
+    }
+    .sale__item:hover .product__thumb .product__thumb-2 {
+    @apply block ;
+    }
+    .add-cart {
+        @apply hidden;
+    }
+    .add-cart:hover{
+        @apply border-b-2 border-black;
+    }
+    .product__content{
+        @apply text-black;
+    }
+    .product__price{
+        @apply text-[#000000c0]
+    }
+    .product__price .old-price{
+        @apply line-through
+    }
+.w-img{
+     @apply h-[344px]
+}
+        .product__sale{
+            @apply absolute right-[-40px] top-[36px] uppercase text-[11px] rotate-90 text-white bg-[#bc8246] text-center min-w-[100px]
+        }
+
+        main{
+            @apply xl:px-[10%] 2xl:px-[15%]
+        }
+    </style>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #loading {
+            z-index: 9999;
+        }
+
+        #loading-center-absolute {
+            width: 100px;
+            height: 100px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .object {
+            width: 25px;
+            height: 25px;
+            background-color: #bc8246;
+            border-radius: 50%;
+            margin: 5px;
+            display: inline-block;
+            animation: loading 1.5s infinite ease-in-out;
+        }
+
+        #first_object {
+            animation-delay: 0.2s;
+        }
+
+        #second_object {
+            animation-delay: 0.3s;
+        }
+
+        #third_object {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loading {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1.0);
+            }
+        }
+
+        /* Dropdown/Menu Animations */
+        .main-menu .has-dropdown:hover>.submenu {
+            visibility: visible;
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            padding: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 10;
+            transform: scaleY(0);
+            transform-origin: 0 0;
+            transition: all 0.3s ease-out;
+        }
+
+        .mega-menu>.submenu {
+            left: 0;
+            min-width: 100vw;
+            width: 100vw;
+            max-width: none;
+            padding: 40px 35px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            transform-origin: 0 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-out;
+
+            min-height: 350px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .main-menu .mega-menu:hover>.submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scaleY(1);
+        }
+
+        .group:hover .mini-cart {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Buttons */
+        .os-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease-out 0s;
+        }
+
+        .os-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: #bc8246;
+            z-index: -1;
+            transition: all 0.3s ease-out 0s;
+        }
+
+        .os-btn:hover::after {
+            height: 100%;
+        }
+
+        .os-btn:hover {
+            color: #ffffff !important;
+            border-color: #bc8246;
+        }
+        .os-btn-black{
+            color: #ffffff;
+            background-color: #323232;
+            border-color: #323232;
+        }
+
+        .os-btn-black:hover {
+            border-color: #bc8246;
+        }
+
+        /* Search Overlay */
+        .header__search {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+            pointer-events: none;
+        }
+
+        .header__search.search-opened {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+
+        .side-mobile-menu ul {
+            padding-left: 0;
+        }
+
+        .side-mobile-menu li {
+            list-style: none;
+        }
+
+        .side-mobile-menu li>a {
+            padding: 13px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(50, 50, 50, 0.1);
+            font-size: 16px;
+            color: #323232;
+            font-weight: 500;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease-out;
+        }
+
+        .side-mobile-menu li>a:hover {
+            color: #bc8246;
+            padding-left: 5px;
+        }
+
+        .side-mobile-menu .mm-collapse:not(.mm-show) {
+            display: none;
+        }
+
+        .side-mobile-menu .mm-collapsing {
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.35s ease;
+        }
+
+        .side-mobile-menu .mm-active>a {
+            color: #bc8246;
+        }
+
+        .side-mobile-menu .submenu li a {
+            text-transform: none;
+            font-weight: 400;
+            padding-left: 15px !important;
+            font-size: 14px;
+        }
+
+        .side-mobile-menu .has-dropdown>a::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Pro';
+            font-weight: 900;
+            transition: transform 0.3s;
+            font-size: 12px;
+        }
+
+        .side-mobile-menu .mm-active>a::after {
+            transform: rotate(-90deg);
+        }
+
+        /* Swiper CSS */
+        .slider__area {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .os-btn-2 {
+            border-color: #323232;
+        }
+
+        .banner__thumb img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: auto;
+        }
+
+        .banner__item:hover .banner__thumb img {
+            transform: scale(1.1);
+        }
+
+        .banner__content {
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .banner__item:hover .banner__content {
+            top: 60%;
+        }
+        .hero-slider-active {
+            position: relative; 
+        }
+
+        .hero-slider-active .hero-slider-pagination {
+            position: absolute;
+            bottom: 20px !important; 
+            top: auto !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: auto !important;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+        .hero-slider-pagination .swiper-pagination-bullet {
+            width: 13px;
+            height: 13px;
+            background: #c2c2c2;
+            border-radius: 50%;
+            margin: 0 7px;
+            opacity: 1;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .hero-slider-pagination .swiper-pagination-bullet-active {
+            border-color: #bc8246;
+            background: #ffffff;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: none !important;
+        }
+
+        .fixed {
+            position: fixed;
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        #header-search {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #header-search.search-opened {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .is-open {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+
+        @media (min-width: 992px) {
+            .cart-list-scroll {
+                @apply max-h-[350px];
+            }
+        }
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+
+        /* Mobile Menu Z-Index Fixes */
+        #mobile-menu-2 {
+            position: relative;
+            z-index: 10010; 
+        }
+
+        .body-overlay {
+            z-index: 9998;
+            pointer-events: none; 
+        }
+
+        .body-overlay.opened {
+            pointer-events: auto; 
+        }
+
+        #header-search {
+            pointer-events: none; 
+        }
+        #header-search.search-opened {
+            pointer-events: auto; 
+            z-index: 9999;
+        }
+
+        #mobile-menu-2 a {
+            position: relative;
+            z-index: 10011;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="text-[14px] font-normal text-[#848b8a] leading-[24px]">
+
+    <div id="loading" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center">
+        <div id="loading-center" class="absolute inset-0 flex items-center justify-center">
+            <div id="loading-center-absolute" class="relative flex">
+                <div class="object" id="first_object"></div>
+                <div class="object" id="second_object"></div>
+                <div class="object" id="third_object"></div>
+            </div>
+        </div>
+    </div>
+
+    <header id="header-sticky" class="top-0 z-20">
+        <nav class="bg-[#f5f5f5] border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-wrap items-center justify-between h-auto">
+
+                    <div class="flex-shrink-0 px-4 py-3 lg:w-3/12">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/logo.png" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow md:flex-grow-0 lg:w-9/12 px-4">
+                        <div class="relative flex justify-end lg:justify-between items-center">
+
+                            <div class="hidden lg:block">
+                                <nav>
+                                    <ul id="desktop-menu"
+                                        class="main-menu flex space-x-8 xl:space-x-10 list-none p-0 m-0">
+                                        <li>
+                                            <a href="index.html"
+                                                class="block text-[#323232] font-medium pt-[27px] pb-[30px] capitalize text-[#444] hover:text-[#bc8246] transition-all duration-300">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="index.html#shop"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Shop</a>
+                                        </li>
+                                        <li>
+                                            <a href="index.html#reviews"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Reviews</a>
+                                        </li>
+                                        <li>
+                                            <a href="contact.html"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <div class="header__action ml-4 flex-shrink-0">
+                                <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
+                                    
+                                    <li class="relative">
+                                        <button type="button" id="search-toggle"
+                                            class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                            <span class="hidden sm:inline">Search</span>
+                                        </button>
+                                    </li>
+                                    
+                                    <li id="cart-dropdown-container" class="relative">
+                                        <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
+                                                text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
+
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                            </svg>
+
+                                            <span class="hidden sm:inline">Cart</span>
+
+                                            <span id="cart-count" class="text-sm ml-1">( 0 )</span>
+                                        </a>
+
+                                        <div id="mini-cart" class="mini-cart-dropdown absolute top-full z-50 p-6 w-[350px] bg-white border border-gray-200 rounded-xl shadow-2xl transition-all duration-300 invisible opacity-0 translate-y-2 
+                                            
+                                            /* Mobile Positioning: Center on small screens (max-sm:), push to right on sm+ */
+                                            max-sm:w-[280px] max-sm:right-1/2 max-sm:transform max-sm:translate-x-1/2
+                                            sm:right-0 sm:translate-x-0
+                                        ">
+                                            <div class="mini-cart-inner">
+
+                                                <ul id="cart"
+                                                    class="mini-cart-list overflow-y-scroll custom-scrollbar cart-list-scroll space-y-7">
+                                                </ul>
+
+                                                <div
+                                                    class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
+                                                    <span class="text-323232">Subtotal:</span>
+                                                    <span id="subtotal_header"
+                                                        class="text-323232 font-bold">$00.00</span>
+                                                </div>
+                                                <div
+                                                    class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
+                                                    <span class="text-323232">Total Balance:</span>
+                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+                                                </div>
+
+                                                <div class="checkout-link space-y-3">
+                                                    <a href="cart.html"
+                                                        class="os-btn block w-full text-center py-3 rounded-full text-white bg-8a8f6a font-medium transition hover:bg-opacity-90 shadow-lg">View
+                                                        Cart</a>
+                                                    <a href="checkout.html"
+                                                        class="os-btn os-btn-black block w-full text-center py-3 rounded-full text-white bg-323232 font-medium transition hover:bg-gray-700 shadow-lg">Checkout</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li id="auth-area" class="relative"></li>
+                                    <li class="relative lg:hidden">
+                                        <button id="mobile-menu-button-2" type="button"
+                                            class="mobile-menu-toggle text-444 inline-block pt-[27px] pb-[30px] hover:text-bc8246 transition-colors duration-300">
+                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 6h16M4 12h16M4 18h16" />
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
+                <div class="px-4 py-3 space-y-2">
+                    <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
+                    <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
+                    <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
+                    <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="slider__area relative overflow-hidden" id="hero-slider-container">
+
+        <div class="swiper hero-slider-active">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide single-slider" data-background="assets/img/slider/slider-1.jpg">
+                    <div
+                        class="single-slider-inner w-full h-hero-xs sm:h-hero-sm md:h-hero-md lg:h-hero-lg xl:h-hero-xl 2xl:h-hero-2xl flex items-center bg-cover bg-no-repeat bg-left md:bg-center">
+                        <div class="container mx-auto px-4">
+                            <div class="flex flex-wrap">
+                                <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
+                                    <div class="slider__content">
+                                        <h2
+                                            class="text-5xl md:text-6xl font-semibold leading-tight text-[#323232] mb-4">
+                                            Bring Warmth <br> to Every Corner
+                                        </h2>
+                                        <p class="mb-11 text-lg text-[#323232]">
+                                            Discover handcrafted home decor inspired by natural textures and clean design.
+                                        </p>
+                                        <a href="#shop" class="os-btn os-btn-2 bg-[#323232] text-white">
+                                            Shop Home Decor
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide single-slider" data-background="assets/img/slider/slider-2.jpg">
+                    <div
+                        class="single-slider-inner w-full h-hero-xs sm:h-hero-sm md:h-hero-md lg:h-hero-lg xl:h-hero-xl 2xl:h-hero-2xl flex items-center bg-cover bg-no-repeat bg-left md:bg-center">
+                        <div class="container mx-auto px-4">
+                            <div class="flex flex-wrap">
+                                <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
+                                    <div class="slider__content">
+                                        <h2 class="text-5xl md:text-6xl font-semibold leading-tight text-[#323232] mb-4">
+                                            Light Up <br> Your Workspace
+                                        </h2>
+                                        <p class="mb-11 text-lg text-[#323232]">
+                                            Stylish, energy-efficient lamps to brighten your day — and your desk.
+                                        </p>
+                                        <a href="#shop" class="os-btn os-btn-2 bg-[#323232] text-white">
+                                            Shop now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide single-slider" data-background="assets/img/slider/slider-3.jpg">
+                    <div
+                        class="single-slider-inner w-full h-hero-xs sm:h-hero-sm md:h-hero-md lg:h-hero-lg xl:h-hero-xl 2xl:h-hero-2xl flex items-center bg-cover bg-no-repeat bg-left md:bg-center">
+                        <div class="container mx-auto px-4">
+                            <div class="flex flex-wrap">
+                                <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-5/12 px-4">
+                                    <div class="slider__content">
+                                        <h2
+                                            class="text-5xl md:text-6xl font-semibold leading-tight text-[#323232] mb-4">
+                                            Smart Design, <br> Smarter Living
+                                        </h2>
+                                        <p class="mb-11 text-lg text-[#323232]">
+                                            Explore innovative gadgets that make your home more connected and efficient.
+                                        </p>
+                                        <a href="#shop" class="os-btn os-btn-2 bg-[#323232] text-white">
+                                            Shop Smart Devices
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-pagination hero-slider-pagination"></div>
+
+        </div>
+
+    </section>
+<div class="banner__area">
+    <div class="container mx-auto px-4">
+        <div class="relative z-10 bg-white p-5 md:p-7 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="banner__item mb-8 relative overflow-hidden group">
+                    <div class="banner__thumb fix overflow-hidden rounded-lg">
+                        <a href="#shop" class="block w-full">
+                            <img src="assets/img/shop/banner/banner-sm-1.jpg" alt="banner"
+                                class="w-full object-cover">
+                        </a>
+                    </div>
+                    <div class="banner__content absolute left-[10%] transition-all duration-300">
+                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                            <a href="#shop"
+                                class="text-gray-900 hover:text-bc8246 transition-colors">Bring Timeless <br> Style Home</a>
+                        </h5>
+                        <a href="#shop"
+                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                            now</a>
+                    </div>
+                </div>
+
+                <div class="banner__item mb-8 relative overflow-hidden group">
+                    <div class="banner__thumb fix overflow-hidden rounded-lg">
+                        <a href="#shop" class="block w-full">
+                            <img src="assets/img/shop/banner/banner-sm-2.jpg" alt="banner"
+                                class="w-full object-cover">
+                        </a>
+                    </div>
+                    <div class="banner__content absolute left-[10%] transition-all duration-300">
+                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                            <a href="#shop"
+                                class="text-gray-900 hover:text-bc8246 transition-colors">Crafted Comfort <br> for Living</a>
+                        </h5>
+                        <a href="#shop"
+                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                            now</a>
+                    </div>
+                </div>
+
+                <div class="banner__item mb-8 relative overflow-hidden group">
+                    <div class="banner__thumb fix overflow-hidden rounded-lg">
+                        <a href="#shop" class="block w-full">
+                            <img src="assets/img/shop/banner/banner-sm-3.jpg" alt="banner"
+                                class="w-full object-cover">
+                        </a>
+                    </div>
+                    <div class="banner__content absolute left-[10%] transition-all duration-300">
+                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                            <a href="#shop"
+                                class="text-gray-900 hover:text-bc8246 transition-colors">Beautiful Tools <br> for Everyday</a>
+                        </h5>
+                        <a href="#shop"
+                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                            now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <main>
+
+
+        <section id="shop" class="product__area pt-16 pb-24">
+
+
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div class="section__title-wrapper text-center mb-14 flex flex-col gap-4">
+                            <div class="section__title mb-2.5">
+                                <h2 class="title text-3xl font-bold text-gray-800">Trending Products</h2>
+                            </div>
+                            <div class="section__sub-title">
+                                <p class="desc text-gray-600">Discover what everyone’s loving right now.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="w-full bg-white px-4 md:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-gray-200">
+                    <div class="relative w-full md:w-1/3">
+                        <input type="text" id="searchInput" placeholder="Search products..."
+                            class="w-full border border-gray-300 rounded-xl py-2 pl-10 pr-4 text-gray-700 focus:ring-2 focus:ring-gray-400 focus:outline-none" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3">
+                        <label for="sortSelect" class="text-sm font-medium text-gray-600">Sort by:</label>
+                        <select id="sortSelect"
+                            class="border border-gray-300 rounded-xl py-2 px-3 text-gray-700 bg-white focus:ring-2 focus:ring-gray-400 focus:outline-none">
+                            <option value="default">Default</option>
+                            <option value="priceLowHigh">Price: Low → High</option>
+                            <option value="priceHighLow">Price: High → Low</option>
+                            <option value="nameAZ">Name: A → Z</option>
+                            <option value="nameZA">Name: Z → A</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div id="trendingProducts"
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div class="product__load-btn text-center mt-6">
+                            <a href="#"
+                                class="os-btn os-btn-3 inline-block py-3 px-8 text-base font-semibold text-gray-800 bg-transparent border border-gray-300 rounded-md hover:bg-gray-800 hover:text-white hover:border-gray-800 transition-all duration-300">
+                                Load More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sale__area py-24">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div class="section__title-wrapper text-center mb-14 flex flex-col gap-4">
+                            <div class="section__title mb-2.5">
+                                <h2 class="title">Sale Off</h2>
+                            </div>
+                            <div class="section__sub-title">
+                                <p class="desc">Unbeatable prices — limited time only.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div id="scroll-container"
+                            class="sale__area-slider flex flex-nowrap overflow-x-auto no-scrollbar cursor-grab select-none">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="review__area py-12 md:py-16 lg:py-20 select-none bg-gray-50" id="reviews">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div class="section__title-wrapper text-center mb-14 flex flex-col gap-4">
+                            <div class="section__title mb-2.5">
+                                <h2 class="title">What Our Customers Say</h2>
+                            </div>
+                            <div class="section__sub-title">
+                                <p class="desc">Hear what our amazing customers have to say about their experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper review-swiper w-full overflow-hidden">
+                    <div id="reviewItems" class="swiper-wrapper">
+                        
+                        <div class="swiper-slide h-auto">
+                            <div class="review-card h-full bg-white p-8 rounded-xl border border-gray-200">
+                                <div class="flex mb-4">
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"Absolutely stunning quality! The delivery was fast, and the packaging was excellent. Highly recommend for unique, well-crafted pieces."</p>
+                                <div class="font-bold text-gray-900">- Sarah J.</div>
+                                <div class="text-sm text-gray-500">Los Angeles, CA</div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto">
+                            <div class="review-card h-full bg-white p-8 rounded-xl border border-gray-200">
+                                <div class="flex mb-4">
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"The customer service was exceptional when I had a question about assembly. The Chair Kimi No Isu is even better in person."</p>
+                                <div class="font-bold text-gray-900">- Mark D.</div>
+                                <div class="text-sm text-gray-500">New York, NY</div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto">
+                            <div class="review-card h-full bg-white p-8 rounded-xl border border-gray-200">
+                                <div class="flex mb-4">
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"I've been looking for unique home decor and this shop delivered. The Sunflower Clock is a fantastic addition to my living room. Five stars!"</p>
+                                <div class="font-bold text-gray-900">- Jennifer L.</div>
+                                <div class="text-sm text-gray-500">Chicago, IL</div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto">
+                            <div class="review-card h-full bg-white p-8 rounded-xl border border-gray-200">
+                                <div class="flex mb-4">
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9733;</span>
+                                    <span class="star text-xl">&#9734;</span>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"Great selection and fast shipping, though one item arrived slightly later than expected. Overall, a very positive experience!"</p>
+                                <div class="font-bold text-gray-900">- Alex T.</div>
+                                <div class="text-sm text-gray-500">Seattle, WA</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="review-pagination swiper-pagination mt-8 relative !bottom-0"></div>
+            </div>
+        </section>
+
+        <section class="blog__area py-12 md:py-16 lg:py-20 select-none" id="blog">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <div class="section__title-wrapper text-center mb-14 flex flex-col gap-4">
+                            <div class="section__title mb-2.5">
+                                <h2 class="title">Our Blog Posts</h2>
+                            </div>
+                            <div class="section__sub-title">
+                                <p class="desc">Insights, updates, and stories from our experts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper blog-swiper w-full overflow-hidden">
+
+                    <div id="blgoPosts" class="swiper-wrapper">
+
+
+                    </div>
+
+                    <div class="swiper-pagination mt-8 relative !bottom-0"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="subscribe__area pb-24 pt-12 md:pt-16 lg:pt-24 w-full flex justify-center items-center">
+            <div class="container mx-auto px-4">
+                <div class="subscribe__inner">
+                    <div class="flex flex-wrap justify-center ">
+                        <div class="w-full lg:w-8/12">
+                            <div class="subscribe__content text-center flex flex-col
+                            gap-8">
+                                <h2 class="title">Get Discount Info</h2>
+                                <p class="desc">Subscribe to the Shopsyfy mailing list to receive updates
+                                    on new
+                                    arrivals, special
+                                    offers and other discount information.</p>
+                                <div class="subscribe__form mt-5">
+                                    <form action="#" class="flex flex-col !justify-center !align-middle gap-10">
+                                        <input
+                                            class="w-full p-2 border-b border-b-neutral-400 text-center outline-none"
+                                            type="email" placeholder="Subscribe to our newsletter...">
+                                        <button
+                                            class="os-btn os-btn-2 os-btn-3 !w-[200px] mx-auto bg-[#323232] text-white">subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <section class="bg-gray-900 text-[#ffffffb6] font-extralight">
+        <div class="container mx-auto px-4 py-12 md:pt-16 lg:pt-24 lg:pb-16">
+            <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8">
+
+                <div class="md:col-span-12 lg:col-span-6 text-center lg:text-left">
+                    <div class="mb-6">
+                        <a href="index.html">
+                            <img src="assets/img/logo/logo-2.png" alt="logo" class="h-10 w-auto mx-auto lg:mx-0">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <div class="mt-6">
+                            <ul class="space-y-4 inline-block text-left">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-map-marker-alt w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Add: 4321 Bali Arcade, Chokbazar, Chittagong, Bangladesh.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-envelope-open-text w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Email: Contact@Shopsyfy.com</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-phone-alt w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Phone Number: (+880) 123 456 789</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-3 text-center lg:text-left">
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-white">Information</h5>
+                    </div>
+                    <div>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white hover:underline">About Us</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Careers</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Delivery Information</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Terms & Condition</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-3 text-center lg:text-left">
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-white">Customer Service</h5>
+                    </div>
+                    <div>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white hover:underline">Shipping Policy</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Help & Contact Us</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Returns & Refunds</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Online Stores</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 py-8">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row justify-between items-center">
+
+                    <div class="mb-4 lg:mb-0">
+                        <p class="text-sm text-center lg:text-left">
+                            Copyright © <a href="index.html"
+                                class="font-semibold hover:text-white hover:underline">Shopsyfy</a> all rights reserved.
+                            Powered by <a href="index.html"
+                                class="font-semibold hover:text-white hover:underline">Meheraj & Tasif</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <ul class="flex space-x-5">
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                            class="fab fa-dribbble text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                            class="fab fa-facebook-f text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                            class="fab fa-twitter text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                            class="fab fa-behance text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                            class="fas fa-share-alt text-lg"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="header-search" class="header__search bg-white flex items-center">
+        <div class="max-w-7xl mx-auto px-4 w-full">
+            <div class="flex flex-wrap justify-center">
+                <div class="w-full px-4">
+                    <div class="text-center">
+                        <form action="#">
+                            <div class="mb-[35px] sm:mb-5">
+                                <button type="button" id="header__search-btn-close"
+                                    class="text-lg text-[#bc8246] hover:text-gray-700">
+                                    <svg class="w-6 h-6 inline-block" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mb-[35px] sm:mb-5">
+                                <h3 class="text-[#323232] text-[30px] font-semibold">Search</h3>
+                            </div>
+                            <div class="mb-[35px]">
+                                <ul
+                                    class="flex items-center justify-center space-x-[60px] md:space-x-[30px] sm:space-x-[10px] list-none p-0 m-0">
+                                    <li class="inline-block"><a href="shop.html"
+                                            class="text-lg text-[#323232] px-0 hover:text-[#bc8246] transition-colors duration-300">All
+                                            Categories</a></li>
+                                </ul>
+                            </div>
+                            <div class="relative max-w-lg mx-auto">
+                                <input type="text" placeholder="Search for products... "
+                                    class="h-[50px] w-full border-none px-[15px] pr-[30px] border-b-2 border-[#ebebeb] focus:border-b-[#bc8246] placeholder:text-[#444] outline-none transition-colors duration-300">
+                                <button type="submit"
+                                    class="absolute top-0 right-0 h-[50px] w-[50px] text-center text-lg bg-transparent text-[#323232] hover:text-[#bc8246] transition-colors duration-300">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="body-overlay hidden "></div>
+
+    <div class="scroll-up fixed right-[30px] bottom-[30px] w-10 h-10 leading-10 text-center text-white bg-[#bc8246] rounded-full shadow-lg hover:bg-[#323232] transition-colors duration-300 cursor-pointer z-[999]"
+        id="scroll" style="display: none;">
+        <a href="javascript:void(0);" class="block text-white"><i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cartHandler.js"></script>
+
+    <script>
+        const cartToggle = document.getElementById('cart-toggle');
+        const miniCart = document.getElementById('mini-cart');
+        const cartContainer = document.getElementById('cart-dropdown-container');
+        
+        const searchToggle = document.getElementById('search-toggle');
+        const mobileMenuButton = document.getElementById('mobile-menu-button-2');
+
+        function toggleCart() {
+            if (miniCart) {
+                miniCart.classList.toggle('is-open');
+            }
+        }
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleCart();
+                e.stopPropagation(); 
+            });
+        }
+
+        if (searchToggle) {
+            searchToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("Search functionality triggered.");
+            });
+        }
+        
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("Mobile menu toggle triggered.");
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains('is-open')) {
+                miniCart.classList.remove('is-open');
+            }
+        });
+
+        if (miniCart) {
+            miniCart.addEventListener('click', (e) => {
+                   e.stopPropagation();
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const authArea = document.getElementById("auth-area");
+
+        function getUser() {
+            return JSON.parse(localStorage.getItem("userProfile")) || {};
+        }
+
+        function renderAuthArea() {
+            const user = getUser();
+            authArea.innerHTML = ""; 
+
+            if (!user.email || !user.password) {
+            authArea.innerHTML = `
+            <a href="login.html" class="os-btn border border-[#bc8246] text-[#bc8246] px-4 py-2 rounded hover:text-white hover:bg-[#bc8246] transition-all duration-300">
+                Login
+            </a>
+            `;
+            return;
+            }
+
+            const displayName = user.fname ? `${user.fname}` : "Account";
+            const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
+
+            authArea.innerHTML = `
+            <div class="relative group">
+                <button class="flex items-center space-x-2 pt-[27px] pb-[30px] hover:text-[#bc8246]">
+                    <svg class="w-6 h-6 text-[#323232]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M5.121 17.804A9 9 0 1118.88 6.196 9 9 0 015.12 17.804z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </button>
+                <ul class="absolute right-0 mt-1 hidden group-hover:block bg-white border border-gray-200 shadow-lg rounded-md w-32 text-left z-[10020]">
+                    <li><a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a></li>
+                    <li><button id="logout-btn" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button></li>
+                </ul>
+            </div>
+            `;
+
+            const logoutBtn = document.getElementById("logout-btn");
+            if (logoutBtn) {
+            logoutBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                logout();
+            });
+            }
+        }
+
+        function logout() {
+            localStorage.setItem("userProfile", JSON.stringify({}));
+            window.location.href = "./login.html";
+        }
+
+        renderAuthArea();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const reviewSwiper = new Swiper('.review-swiper', {
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 8000,
+                    disableOnInteraction: false,
+                },
+                slidesPerView: 1,
+                spaceBetween: 20,
+                pagination: {
+                    el: '.review-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                },
+            });
+        });
+    </script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const heroSwiper = new Swiper('.hero-slider-active', {
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 8000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.hero-slider-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    0: {
+                        pagination: false,
+                    },
+                    768: {
+                        pagination: {
+                            el: '.hero-slider-pagination',
+                            clickable: true,
+                        },
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        const swiper = new Swiper('.client-swiper', {
+
+            loop: true,
+
+            slidesPerView: 5,
+
+            breakpoints: {
+                320: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 48
+                }
+            },
+
+            spaceBetween: 5,
+
+            grabCursor: true,
+        });
+    </script>
+    <script>
+        const blogSwiper = new Swiper('.blog-swiper', {
+
+            loop: true,
+
+            slidesPerView: 4,
+
+            spaceBetween: 0,
+
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                1250: {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                },
+                1440: {
+                    slidesPerView: 4,
+                    spaceBetween: 20
+                }
+            },
+
+
+            grabCursor: true,
+        });
+    </script>
+
+
+    <script>
+        const sliders = document.querySelectorAll('.drag-scroll');
+
+        sliders.forEach(slider => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active:cursor-grabbing');
+
+                e.preventDefault();
+
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('active:cursor-grabbing');
+            });
+
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('active:cursor-grabbing');
+            });
+
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+
+                e.preventDefault();
+
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            });
+
+            slider.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            }, {
+                passive: true
+            }); 
+
+            slider.addEventListener('touchend', () => {
+                isDown = false;
+            });
+
+            slider.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+
+                const x = e.touches[0].pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            }, {
+                passive: true
+            });
+        });
+    </script>
+
+
+<script>
+    (function ($) {
+        "use strict";
+
+        function toggleOverlay(isOpen) {
+            if (isOpen) {
+                $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
+                $('.body-overlay').css('pointer-events', 'auto');
+                $('body').addClass('overflow-hidden');
+            } else {
+                const isSearchOpen = $("#header-search").hasClass('search-opened');
+                const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
+                if (!isSearchOpen && !isMobileMenuOpen) {
+                    $('body').removeClass('overflow-hidden');
+                    $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
+                    $('.body-overlay').css('pointer-events', 'none');
+                }
+            }
+        }
+
+        const searchOpenClass = 'search-opened';
+        const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
+
+        // Search Toggle
+        $(".search-toggle").on("click", function (e) {
+            e.preventDefault();
+            $("#mobile-menu-2").addClass('hidden');
+            $("#header-search").addClass(searchOpenClass);
+            toggleOverlay(true);
+            $('#header-search input[type="text"]').focus();
+        });
+        $("#header__search-btn-close").on("click", function (e) {
+            e.preventDefault();
+            $("#header-search").removeClass(searchOpenClass);
+            toggleOverlay(false);
+        });
+
+        // Mobile Menu Toggle
+        $(".mobile-menu-toggle").on("click", function (e) {
+            e.preventDefault();
+            $("#header-search").removeClass(searchOpenClass);
+            $("#mobile-menu-2").toggleClass('hidden');
+            if (!$("#mobile-menu-2").hasClass('hidden')) {
+                toggleOverlay(true);
+            } else {
+                if (!$("#header-search").hasClass(searchOpenClass)) {
+                    toggleOverlay(false);
+                }
+            }
+        });
+
+        // Overlay Click
+        $(".body-overlay").on("click", function () {
+            $("#header-search").removeClass(searchOpenClass);
+            $("#mobile-menu-2").addClass('hidden');
+            toggleOverlay(false);
+        });
+
+        // Sticky Header
+        $(window).on('scroll', function () {
+            var scroll = $(window).scrollTop();
+            if (scroll < 100) {
+                $("#header-sticky").removeClass(stickyClasses);
+            } else {
+                $("#header-sticky").addClass(stickyClasses);
+            }
+        });
+
+        // Loading Animation
+        $(window).on('load', function () {
+            $("#loading").fadeOut(500);
+        });
+        $(document).ready(function () {
+            if ($("#loading").is(':visible')) {
+                $("#loading").delay(100).fadeOut(500);
+            }
+        });
+
+        // Scroll to Top Button
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() > 600) {
+                $('#scroll').fadeIn(200);
+            } else {
+                $('#scroll').fadeOut(200);
+            }
+        });
+        $('#scroll').on('click', function (event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: 0,
+            }, 600);
+        });
+
+        // Background Images
+        $("[data-background]").each(function () {
+            $(this).css("background-image", "url( " + $(this).attr("data-background") + " )");
+        });
+
+        // Mobile Menu MetisMenu (if it's needed)
+        $(document).ready(function () {
+            const $mobileMenu = $('#mobile-menu-active');
+            if ($mobileMenu.length) {
+                $mobileMenu.metisMenu();
+            }
+        });
+
+    })(jQuery);
+</script>
+
+</body>
+
+</html>

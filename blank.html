@@ -1,0 +1,594 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shopsyfy</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/fontAwesome5Pro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'f5f5f5': '#f5f5f5',
+                        '323232': '#323232', // Used as primary dark text/button color
+                        '444': '#444444',
+                        'bc8246': '#bc8246',
+                        '8a8f6a': '#8a8f6a', // Used as accent green color
+                        'ebebeb': '#ebebeb',
+                    },
+                    screens: {
+                        'sm': '576px',
+                        'md': '768px',
+                        'lg': '1024px',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        .title { @apply text-[2.2rem] text-[#323232]; }
+        .desc { @apply px-10 text-[15px]; }
+        main { @apply xl:px-[10%] 2xl:px-[15%]; }
+    </style>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+        body { font-family: 'Poppins', sans-serif; }
+
+        /* Dropdown/Menu Animations */
+        .main-menu .has-dropdown:hover>.submenu {
+            visibility: visible; opacity: 1; transform: scaleY(1);
+        }
+        .submenu {
+            position: absolute; top: 100%; left: 0; background-color: white;
+            min-width: 200px; padding: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0; visibility: hidden; z-index: 10; transform: scaleY(0);
+            transform-origin: 0 0; transition: all 0.3s ease-out;
+        }
+
+        /* Buttons */
+        .os-btn { position: relative; overflow: hidden; z-index: 1; transition: all 0.3s ease-out; }
+        .os-btn::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 0;
+            background-color: #bc8246; z-index: -1; transition: all 0.3s ease-out;
+        }
+        .os-btn:hover::after { height: 100%; }
+        .os-btn:hover { color: #fff !important; border-color: #bc8246; }
+        .os-btn-black { color: #fff; background-color: #323232; border-color: #323232; }
+        .os-btn-black:hover { border-color: #bc8246; }
+
+        /* Search Overlay */
+        .header__search {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999; opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.785,0.135,0.15,0.86);
+            pointer-events: none;
+        }
+        .header__search.search-opened {
+            opacity: 1; visibility: visible; pointer-events: auto;
+        }
+
+        /* Cart Dropdown */
+        .is-open { visibility: visible !important; opacity: 1 !important; transform: translateY(0) !important; }
+
+        /* Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f3f4f6; }
+
+
+        #mobile-menu-2 {
+            position: relative;
+            z-index: 10010; 
+        }
+
+        .body-overlay {
+            z-index: 9998;
+            pointer-events: none; 
+        }
+
+        .body-overlay.opened {
+            pointer-events: auto; 
+        }
+
+        #header-search {
+            pointer-events: none; 
+        }
+        #header-search.search-opened {
+            pointer-events: auto; 
+            z-index: 9999;
+        }
+
+        #mobile-menu-2 a {
+            position: relative;
+            z-index: 10011;
+        }
+    </style>
+
+</head>
+
+<body class="text-[14px] font-normal text-[#848b8a] leading-[24px]">
+
+    <!-- HEADER -->
+    <header id="header-sticky" class="top-0 z-20">
+    <nav class="bg-[#f5f5f5] border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between h-auto">
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 px-4 py-3 lg:w-3/12">
+                    <a href="index.html">
+                        <img src="assets/img/logo/logo.png" alt="logo">
+                    </a>
+                </div>
+
+                <!-- Nav Links -->
+                <div class="flex-grow md:flex-grow-0 lg:w-9/12 px-4">
+                    <div class="relative flex justify-end lg:justify-between items-center">
+
+                        <!-- Desktop Nav -->
+                        <div class="hidden lg:block">
+                            <ul class="main-menu flex space-x-8 xl:space-x-10 list-none p-0 m-0">
+                                <li><a href="index.html" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Home</a></li>
+                                <li><a href="index.html#shop" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Shop</a></li>
+                                <li><a href="index.html#reviews" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Reviews</a></li>
+                                <li><a href="contact.html" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Header Actions -->
+                        <div class="header__action ml-4 flex-shrink-0">
+                            <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
+                                
+                                <!-- Search Icon -->
+                                <li class="relative">
+                                        <button type="button" id="search-toggle"
+                                            class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                            </svg>
+                                            <span class="hidden sm:inline">Search</span>
+                                        </button>
+                                    </li>
+                                <li id="cart-dropdown-container" class="relative">
+                                        <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
+                                                text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
+
+                                            
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                            </svg>
+
+                                           
+                                            <span class="hidden sm:inline">Cart</span>
+
+                                            
+                                            <span id="cart-count" class="text-sm ml-1">( 0 )</span>
+                                        </a>
+
+                                        <!-- Mini-Cart Dropdown Content -->
+                                        <div id="mini-cart" class="mini-cart-dropdown absolute top-full z-50 p-6 w-[350px] bg-white border border-gray-200 rounded-xl shadow-2xl transition-all duration-300 invisible opacity-0 translate-y-2 
+                                            
+                                            /* Mobile Positioning: Center on small screens (max-sm:), push to right on sm+ */
+                                            max-sm:w-[280px] max-sm:right-1/2 max-sm:transform max-sm:translate-x-1/2
+                                            sm:right-0 sm:translate-x-0
+                                        ">
+                                            <div class="mini-cart-inner">
+
+                                               
+                                                <ul id="cart"
+                                                    class="mini-cart-list overflow-y-scroll custom-scrollbar cart-list-scroll space-y-7">
+
+
+
+                                                </ul>
+
+                                                <!-- Total Price -->
+                                                <div
+                                                    class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
+                                                    <span class="text-323232">Subtotal:</span>
+                                                    <span id="subtotal_header"
+                                                        class="text-323232 font-bold">$00.00</span>
+
+                                                </div>
+                                                <!-- Current Balance -->
+                                                <div
+                                                    class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
+                                                    <span class="text-323232">Total Balance:</span>
+                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+
+                                                </div>
+
+                                                <!-- Checkout Links -->
+                                                <div class="checkout-link space-y-3">
+                                                    <a href="cart.html"
+                                                        class="os-btn block w-full text-center py-3 rounded-full text-white bg-8a8f6a font-medium transition hover:bg-opacity-90 shadow-lg">View
+                                                        Cart</a>
+                                                    <a href="checkout.html"
+                                                        class="os-btn os-btn-black block w-full text-center py-3 rounded-full text-white bg-323232 font-medium transition hover:bg-gray-700 shadow-lg">Checkout</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                <!--  Login/Profile Placeholder -->
+                                <li id="auth-area" class="relative"></li>
+
+                                <!-- Mobile Menu Button -->
+                                <li class="relative lg:hidden">
+                                    <button id="mobile-menu-button-2" type="button" class="inline-block pt-[27px] pb-[30px] hover:text-bc8246">
+                                        <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-3 space-y-2">
+                <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
+                <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
+                <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
+                <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl font-bold text-center text-323232 mb-8">This is your new blank page.</h1>
+                <p class="text-center text-lg text-gray-600">Start building your page content within this main tag.</p>
+                <div class="mt-12 p-8 bg-f5f5f5 rounded-lg shadow">
+                    <h2 class="text-2xl font-semibold text-323232 mb-4">Content Section</h2>
+                    <p class="text-gray-700">The header and footer are ready to go. You can safely add your page-specific HTML here.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <section class="bg-gray-900 text-[#ffffffb6] font-extralight">
+        <div class="container mx-auto px-4 py-12 md:pt-16 lg:pt-24 lg:pb-16">
+            <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8">
+
+                <div class="md:col-span-12 lg:col-span-6 text-center lg:text-left">
+                    <div class="mb-6">
+                        <a href="index.html">
+                            <img src="assets/img/logo/logo-2.png" alt="logo" class="h-10 w-auto mx-auto lg:mx-0">
+                        </a>
+                    </div>
+                    <div>
+                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <div class="mt-6">
+                            <ul class="space-y-4 inline-block text-left">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-map-marker-alt w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Add: 4321 Bali Arcade, Chokbazar, Chittagong, Bangladesh.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-envelope-open-text w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Email: Contact@Shopsyfy.com</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mr-4 mt-1">
+                                        <i class="fal fa-phone-alt w-5 text-center"></i>
+                                    </div>
+                                    <div>
+                                        <span>Phone Number: (+880) 123 456 789</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-3 text-center lg:text-left">
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-white">Information</h5>
+                    </div>
+                    <div>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white hover:underline">About Us</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Careers</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Delivery Information</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Terms & Condition</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-3 text-center lg:text-left">
+                    <div class="mb-6">
+                        <h5 class="text-lg font-semibold text-white">Customer Service</h5>
+                    </div>
+                    <div>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white hover:underline">Shipping Policy</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Help & Contact Us</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Returns & Refunds</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Online Stores</a></li>
+                            <li><a href="#" class="hover:text-white hover:underline">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 py-8">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row justify-between items-center">
+
+                    <div class="mb-4 lg:mb-0">
+                        <p class="text-sm text-center lg:text-left">
+                            Copyright © <a href="index.html"
+                                class="font-semibold hover:text-white hover:underline">Shopsyfy</a> all rights reserved.
+                            Powered by <a href="index.html"
+                                class="font-semibold hover:text-white hover:underline">Meheraj & Tasif</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <ul class="flex space-x-5">
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                        class="fab fa-dribbble text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                        class="fab fa-facebook-f text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                        class="fab fa-twitter text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                        class="fab fa-behance text-lg"></i></a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white"><i
+                                        class="fas fa-share-alt text-lg"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Overlay -->
+    <section id="header-search" class="header__search bg-white flex items-center">
+        <div class="max-w-7xl mx-auto px-4 w-full">
+            <div class="flex flex-wrap justify-center">
+                <div class="w-full px-4">
+                    <div class="text-center">
+                        <form action="#">
+                            <div class="mb-[35px] sm:mb-5">
+                                <button type="button" id="header__search-btn-close"
+                                    class="text-lg text-[#bc8246] hover:text-gray-700">
+                                    <svg class="w-6 h-6 inline-block" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mb-[35px] sm:mb-5">
+                                <h3 class="text-[#323232] text-[30px] font-semibold">Search</h3>
+                            </div>
+                            <div class="mb-[35px]">
+                                <ul
+                                    class="flex items-center justify-center space-x-[60px] md:space-x-[30px] sm:space-x-[10px] list-none p-0 m-0">
+                                    <li class="inline-block"><a href="index.html#shop"
+                                            class="text-lg text-[#323232] px-0 hover:text-[#bc8246] transition-colors duration-300">All
+                                            Categories</a></li>
+                                </ul>
+                            </div>
+                            <div class="relative max-w-lg mx-auto">
+                                <input type="text" placeholder="Search for products... "
+                                    class="h-[50px] w-full border-none px-[15px] pr-[30px] border-b-2 border-[#ebebeb] focus:border-b-[#bc8246] placeholder:text-[#444] outline-none transition-colors duration-300">
+                                <button type="submit"
+                                    class="absolute top-0 right-0 h-[50px] w-[50px] text-center text-lg bg-transparent text-[#323232] hover:text-[#bc8246] transition-colors duration-300">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="body-overlay hidden"></div>
+
+    
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cartHandler.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        const cartToggle = document.getElementById('cart-toggle');
+        const miniCart = document.getElementById('mini-cart');
+        const cartContainer = document.getElementById('cart-dropdown-container');
+
+        function toggleCart() {
+            if (miniCart) {
+                miniCart.classList.toggle('is-open');
+            }
+        }
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleCart();
+                e.stopPropagation(); 
+            });
+        }
+        
+        document.addEventListener('click', (e) => {
+            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains('is-open')) {
+                miniCart.classList.remove('is-open');
+            }
+        });
+
+        if (miniCart) {
+            miniCart.addEventListener('click', (e) => {
+                   e.stopPropagation();
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const authArea = document.getElementById("auth-area");
+
+        // Helper: Get user data from localStorage
+        function getUser() {
+            return JSON.parse(localStorage.getItem("userProfile")) || {};
+        }
+
+        // Helper: Render auth area based on login state
+        function renderAuthArea() {
+            const user = getUser();
+            authArea.innerHTML = ""; // clear content
+
+            // If user not logged in
+            if (!user.email || !user.password) {
+            authArea.innerHTML = `
+            <a href="login.html" class="os-btn border border-[#bc8246] text-[#bc8246] px-4 py-2 rounded hover:text-white hover:bg-[#bc8246] transition-all duration-300">
+                Login
+            </a>
+            `;
+            return;
+            }
+
+            // If user is logged in
+            const displayName = user.fname ? `${user.fname}` : "Account";
+            const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
+
+            authArea.innerHTML = `
+            <div class="group relative inline-block">
+                <button class="flex items-center justify-center text-xl text-gray-700 hover:text-blue-600 focus:outline-none">
+                <i class="fal fa-user-circle"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-md hidden group-hover:block z-[9999]">
+                <a href="./profile.html" class="block px-4 py-2 text-sm hover:bg-gray-100">My Profile</a>
+                <button id="logout-btn" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
+                </div>
+            </div>
+            `;
+
+            // Attach logout functionality
+            const logoutBtn = document.getElementById("logout-btn");
+            if (logoutBtn) {
+            logoutBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                logout();
+            });
+            }
+        }
+
+        // Helper: Logout
+        function logout() {
+            localStorage.setItem("userProfile", JSON.stringify({}));
+            window.location.href = "./login.html";
+        }
+
+        // Initial render
+        renderAuthArea();
+        });
+    </script>
+
+
+    <script>
+    (function ($) {
+        "use strict";
+
+        function toggleOverlay(isOpen) {
+            if (isOpen) {
+                $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
+                $('.body-overlay').css('pointer-events', 'auto');
+                $('body').addClass('overflow-hidden');
+            } else {
+                const isSearchOpen = $("#header-search").hasClass('search-opened');
+                const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
+                if (!isSearchOpen && !isMobileMenuOpen) {
+                    $('body').removeClass('overflow-hidden');
+                    $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
+                    $('.body-overlay').css('pointer-events', 'none');
+                }
+            }
+        }
+
+        const searchOpenClass = 'search-opened';
+        const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
+
+        // Search Toggle
+        $(".search-toggle").on("click", function (e) {
+            e.preventDefault();
+            $("#mobile-menu-2").addClass('hidden');
+            $("#header-search").addClass(searchOpenClass);
+            toggleOverlay(true);
+        });
+        $("#header__search-btn-close").on("click", function (e) {
+            e.preventDefault();
+            $("#header-search").removeClass(searchOpenClass);
+            toggleOverlay(false);
+        });
+
+        // ✅ Mobile Menu Toggle
+        $("#mobile-menu-button-2").on("click", function (e) {
+            e.preventDefault();
+            $("#header-search").removeClass(searchOpenClass);
+            $("#mobile-menu-2").toggleClass('hidden');
+            if (!$("#mobile-menu-2").hasClass('hidden')) toggleOverlay(true);
+            else toggleOverlay(false);
+        });
+
+        // Overlay Click
+        $(".body-overlay").on("click", function () {
+            $("#header-search").removeClass(searchOpenClass);
+            $("#mobile-menu-2").addClass('hidden');
+            toggleOverlay(false);
+        });
+
+        // Sticky Header
+        $(window).on('scroll', function () {
+            var scroll = $(window).scrollTop();
+            if (scroll < 100) $("#header-sticky").removeClass(stickyClasses);
+            else $("#header-sticky").addClass(stickyClasses);
+        });
+    })(jQuery);
+    </script>
+
+</body>
+
+</html>
