@@ -19,14 +19,19 @@ async function setBal(newBal, u = 0) {
 }
 
 async function getBal() {
-  let userCredentials = JSON.parse(localStorage.getItem("userProfile"));
+    let userCredentials = JSON.parse(localStorage.getItem("userProfile"));
+    
+    // Set a default balance of 1000 for non-logged-in users.
+    const defaultBalance = 1000;
 
-  // if no user is logged in or userProfile missing
-  let bal = (userCredentials && userCredentials.balance) || 1000;
-
-  balance = parseFloat(bal);
-  document.getElementById("balance").innerText = "$" + balance.toString();
-  return balance;
+    let bal = (userCredentials && userCredentials.balance) ? userCredentials.balance : defaultBalance;
+    
+    balance = parseFloat(bal);
+    
+    // Update the DOM
+    document.getElementById("balance").innerText = "$" + balance.toFixed(2); // Using toFixed(2) for currency format
+    
+    return balance;
 }
 
 // Add new item (no duplicates)
@@ -81,7 +86,7 @@ async function renderCart(disableBtn = 0) {
       <li class="flex items-start justify-between pb-2 border-b border-gray-200">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0">
-            <a href="product-details.html">
+            <a href="#">
               <img class="w-[75px] h-[75px] object-cover rounded-md"
                    src="${cart[i].img}"
                    alt="${cart[i].name}"
@@ -90,7 +95,7 @@ async function renderCart(disableBtn = 0) {
           </div>
           <div class="cart-content text-left space-y-1">
             <h5 class="text-sm font-medium">
-              <a href="product-details.html"
+              <a href="#"
                  class="text-gray-700 hover:text-[#8a8f6a] transition">${
                    cart[i].name
                  }</a>
@@ -231,14 +236,14 @@ async function cartPageRender() {
     const tt = `
     <tr>
       <td class="product-thumbnail">
-        <a href="product-details.html">
+        <a href="#">
           <img class="w-16 h-16 object-cover rounded-md"
             src="${cart[i].img}"
             alt="${cart[i].name}">
         </a>
       </td>
       <td class="cart-product-name">
-        <a href="product-details.html">${cart[i].name}</a>
+        <a href="#">${cart[i].name}</a>
       </td>
       <td class="product-price">
         <span class="amount">${cart[i].price}</span>
@@ -348,6 +353,7 @@ getBal();
 
 getProfile();
 
+let authArea = document.getElementById("auth-area");
 if (userCredentials.email && userCredentials.password) {
   renderAuthArea();
 } else {
@@ -372,10 +378,10 @@ if (userCredentials.email && userCredentials.password) {
         </div>
 
         <!-- Login Button -->
-        <a href="login.html" class="bg-[#bc8246] text-white text-sm px-4 py-2 rounded-lg font-medium 
+        <button onclick="window.location.href='./login.html'" class="bg-[#bc8246] text-white text-sm px-4 py-2 rounded-lg font-medium 
             hover:bg-[#a96d38] transition">
             Login
-        </a>
+        </button>
     </div>`;
 }
 
@@ -386,26 +392,24 @@ function renderAuthArea() {
   // Logged in → show profile icon + dropdown
   authArea.innerHTML = `
             <div class="relative group">
-                <button class="flex items-center space-x-2 pt-[27px] pb-[30px] hover:text-[#bc8246]">
-                    <svg class="w-6 h-6 text-[#323232]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M5.121 17.804A9 9 0 1118.88 6.196 9 9 0 015.12 17.804z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  <a href='./profile.html'>${
+                <button id='profilebtn' class="flex items-center space-x-2 pt-[27px] pb-[30px] hover:text-[#bc8246]">
+                        <i class="fal fa-user-circle"></i>
+                  <span class="hidden md:inline">${
                     userCredentials.fname || userCredentials.lname
                       ? userCredentials.fname + " " + userCredentials.lname
                       : userCredentials.email
-                  }</a>
+                  }</span>
                 </button>
                 <ul class="absolute right-0 mt-1 hidden group-hover:block bg-white border border-gray-200 shadow-lg rounded-md w-32 text-left z-[10020]">
-                    <li><a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a></li>
+                    <li><a href="./profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a></li>
                     <li><button id="logout-btn" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button></li>
                 </ul>
             </div>
         `;
 
+  document.getElementById("profilebtn").addEventListener("click", () => {
+    window.location.href = "./profile.html";
+  });
   document.getElementById("logout-btn").addEventListener("click", () => {
     logout();
     renderAuthArea();
