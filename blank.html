@@ -121,63 +121,80 @@
 
 <body class="text-[14px] font-normal text-[#848b8a] leading-[24px]">
 
+    <div id="alert" class="hidden fixed top-52 left-0 z-[99999] w-full flex justify-center items-center">
+    </div>
+
     <!-- HEADER -->
     <header id="header-sticky" class="top-0 z-20">
-    <nav class="bg-[#f5f5f5] border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-wrap items-center justify-between h-auto">
+        <nav class="bg-[#f5f5f5] border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-wrap items-center justify-between h-auto">
 
-                <!-- Logo -->
-                <div class="flex-shrink-0 px-4 py-3 lg:w-3/12">
-                    <a href="index.html">
-                        <img src="assets/img/logo/logo.png" alt="logo">
-                    </a>
-                </div>
-
-                <!-- Nav Links -->
-                <div class="flex-grow md:flex-grow-0 lg:w-9/12 px-4">
-                    <div class="relative flex justify-end lg:justify-between items-center">
-
-                        <!-- Desktop Nav -->
-                        <div class="hidden lg:block">
-                            <ul class="main-menu flex space-x-8 xl:space-x-10 list-none p-0 m-0">
-                                <li><a href="index.html" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Home</a></li>
-                                <li><a href="index.html#shop" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Shop</a></li>
-                                <li><a href="index.html#reviews" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Reviews</a></li>
-                                <li><a href="contact.html" class="block text-[#444] font-medium pt-[27px] pb-[30px] hover:text-[#bc8246]">Contact</a></li>
-                            </ul>
+                    <div class="flex-shrink-0 px-4 py-3 lg:w-3/12">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/logo.png" alt="logo">
+                            </a>
                         </div>
+                    </div>
 
-                        <!-- Header Actions -->
-                        <div class="header__action ml-4 flex-shrink-0">
-                            <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
-                                
-                                <!-- Search Icon -->
-                                <li class="relative">
+                    <div class="flex-grow md:flex-grow-0 lg:w-9/12 px-4">
+                        <div class="relative flex justify-end lg:justify-between items-center">
+
+                            <div class="hidden lg:block">
+                                <nav>
+                                    <ul id="desktop-menu"
+                                        class="main-menu flex space-x-8 xl:space-x-10 list-none p-0 m-0">
+                                        <li>
+                                            <a href="index.html"
+                                                class="block text-[#323232] font-medium pt-[27px] pb-[30px] capitalize text-[#444] hover:text-[#bc8246] transition-all duration-300">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="index.html#shop"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Shop</a>
+                                        </li>
+                                        <li>
+                                            <a href="index.html#reviews"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Reviews</a>
+                                        </li>
+                                        <li>
+                                            <a href="contact.html"
+                                                class="block text-[#444] font-medium pt-[27px] pb-[30px] capitalize hover:text-[#bc8246] transition-all duration-300">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <div class="header__action ml-4 flex-shrink-0">
+                                <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
+
+                                    <li class="relative">
                                         <button type="button" id="search-toggle"
                                             class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                             <span class="hidden sm:inline">Search</span>
                                         </button>
                                     </li>
-                                <li id="cart-dropdown-container" class="relative">
+
+                                    <li id="cart-dropdown-container" class="relative">
                                         <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
                                                 text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
 
-                                            
+                                            <!-- SVG Icon (Shopping Bag) -->
                                             <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>
 
-                                           
+                                            <!-- Cart Text (Hidden on default/xs, shown on sm+) -->
                                             <span class="hidden sm:inline">Cart</span>
 
-                                            
+                                            <!-- Cart Count Text (Using simple text count (03)) -->
                                             <span id="cart-count" class="text-sm ml-1">( 0 )</span>
                                         </a>
 
@@ -190,7 +207,7 @@
                                         ">
                                             <div class="mini-cart-inner">
 
-                                               
+                                                <!-- List of Items (Scrollable Area) -->
                                                 <ul id="cart"
                                                     class="mini-cart-list overflow-y-scroll custom-scrollbar cart-list-scroll space-y-7">
 
@@ -210,7 +227,7 @@
                                                 <div
                                                     class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
                                                     <span class="text-323232">Total Balance:</span>
-                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+                                                    <span id="balance" class="text-323232 font-bold">$00.00</span>
 
                                                 </div>
 
@@ -226,47 +243,48 @@
                                             </div>
                                         </div>
                                     </li>
-
-                                <!--  Login/Profile Placeholder -->
-                                <li id="auth-area" class="relative"></li>
-
-                                <!-- Mobile Menu Button -->
-                                <li class="relative lg:hidden">
-                                    <button id="mobile-menu-button-2" type="button" class="inline-block pt-[27px] pb-[30px] hover:text-bc8246">
-                                        <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
+                                    <!-- ✅ Login/Profile Placeholder -->
+                                    <li id="auth-area" class="relative"></li>
+                                    <li class="relative lg:hidden">
+                                        <button id="mobile-menu-button-2" type="button"
+                                            class="mobile-menu-toggle text-444 inline-block pt-[27px] pb-[30px] hover:text-bc8246 transition-colors duration-300">
+                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 6h16M4 12h16M4 18h16" />
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
-            <div class="px-4 py-3 space-y-2">
-                <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
-                <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
-                <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
-                <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+            <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
+                <div class="px-4 py-3 space-y-2">
+                    <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
+                    <a href="index.html#shop"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
+                    <a href="index.html#reviews"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
+                    <a href="contact.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
 
     <!-- MAIN CONTENT -->
     <main>
         <section class="py-20">
             <div class="container mx-auto px-4">
-                <h1 class="text-4xl font-bold text-center text-323232 mb-8">This is your new blank page.</h1>
-                <p class="text-center text-lg text-gray-600">Start building your page content within this main tag.</p>
+                <h1 class="text-4xl font-bold text-center text-323232 mb-8">Blank page.</h1>
+                <p class="text-center text-lg text-gray-600">Main tag.</p>
                 <div class="mt-12 p-8 bg-f5f5f5 rounded-lg shadow">
                     <h2 class="text-2xl font-semibold text-323232 mb-4">Content Section</h2>
-                    <p class="text-gray-700">The header and footer are ready to go. You can safely add your page-specific HTML here.</p>
+                    <p class="text-gray-700">...</p>
                 </div>
             </div>
         </section>
@@ -590,5 +608,6 @@
     </script>
 
 </body>
+
 
 </html>
