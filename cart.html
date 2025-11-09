@@ -23,11 +23,11 @@
                 extend: {
                     colors: {
                         'f5f5f5': '#f5f5f5',
-                        '323232': '#323232', 
+                        '323232': '#323232',
                         '444': '#444444',
                         'bc8246': '#bc8246',
                         'c2c2c2': '#c2c2c2',
-                        '8a8f6a': '#8a8f6a', 
+                        '8a8f6a': '#8a8f6a',
                         'ebebeb': '#ebebeb',
                     },
                     height: {
@@ -548,6 +548,7 @@
             visibility: visible;
             pointer-events: auto;
         }
+
         .is-open {
             visibility: visible !important;
             opacity: 1 !important;
@@ -579,31 +580,45 @@
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #d1d5db; 
+            background: #d1d5db;
             border-radius: 3px;
         }
+
+        @media (max-width: 639px) {
+            #mini-cart {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                width: 280px !important;
+            }
+        }
+
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f3f4f6; 
-        }#mobile-menu-2 {
+            background: #f3f4f6;
+        }
+
+        #mobile-menu-2 {
             position: relative;
-            z-index: 10010; 
+            z-index: 10010;
         }
 
         .body-overlay {
             z-index: 9998;
-            pointer-events: none; 
+            pointer-events: none;
         }
 
         .body-overlay.opened {
-            pointer-events: auto; 
+            pointer-events: auto;
         }
 
         #header-search {
-            pointer-events: none; 
+            pointer-events: none;
         }
+
         #header-search.search-opened {
-            pointer-events: auto; 
+            pointer-events: auto;
             z-index: 9999;
         }
 
@@ -627,7 +642,6 @@
             </div>
         </div>
     </div>
-
     <header id="header-sticky" class="top-0 z-20">
         <nav class="bg-[#f5f5f5] border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4">
@@ -670,18 +684,19 @@
 
                             <div class="header__action ml-4 flex-shrink-0">
                                 <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
-                                    
+
                                     <li class="relative">
                                         <button type="button" id="search-toggle"
                                             class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                             <span class="hidden sm:inline">Search</span>
                                         </button>
                                     </li>
-                                    
+
                                     <li id="cart-dropdown-container" class="relative">
                                         <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
                                                 text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
@@ -729,7 +744,7 @@
                                                 <div
                                                     class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
                                                     <span class="text-323232">Total Balance:</span>
-                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+                                                    <span id="balance" class="text-323232 font-bold">$00.00</span>
 
                                                 </div>
 
@@ -745,12 +760,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <!-- ✅ Login/Profile Placeholder -->
+                                    <!--  Login/Profile Placeholder -->
                                     <li id="auth-area" class="relative"></li>
                                     <li class="relative lg:hidden">
                                         <button id="mobile-menu-button-2" type="button"
                                             class="mobile-menu-toggle text-444 inline-block pt-[27px] pb-[30px] hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 6h16M4 12h16M4 18h16" />
                                             </svg>
@@ -764,16 +780,20 @@
             </div>
             <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
                 <div class="px-4 py-3 space-y-2">
-                    <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
-                    <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
-                    <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
-                    <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+                    <a href="index.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
+                    <a href="index.html#shop"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
+                    <a href="index.html#reviews"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
+                    <a href="contact.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
                 </div>
             </div>
         </nav>
     </header>
-    
- <main>
+
+    <main>
         <section class="page__title-section page__title p-relative d-flex align-items-center"
             data-background="https://html.storebuild.shop/outstock-prv/outstock/assets/img/page-title/page-title-1.jpg">
             <div class="max-w-7xl mx-auto px-4 w-full">
@@ -873,7 +893,10 @@
                         </a>
                     </div>
                     <div>
-                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at
+                            affordable prices. We’re dedicated to giving you a smooth shopping experience, fast
+                            delivery, and excellent customer support. Discover the latest trends and shop with
+                            confidence — anytime, anywhere.</p>
                         <div class="mt-6">
                             <ul class="space-y-4 inline-block text-left">
                                 <li class="flex items-start">
@@ -1036,35 +1059,35 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
-        const authArea = document.getElementById("auth-area");
+            const authArea = document.getElementById("auth-area");
 
-        // Helper: Get user data from localStorage
-        function getUser() {
-            return JSON.parse(localStorage.getItem("userProfile")) || {};
-        }
+            // Helper: Get user data from localStorage
+            function getUser() {
+                return JSON.parse(localStorage.getItem("userProfile")) || {};
+            }
 
-        // Helper: Render auth area based on login state
-        function renderAuthArea() {
-            const user = getUser();
-            authArea.innerHTML = ""; // clear content
+            // Helper: Render auth area based on login state
+            function renderAuthArea() {
+                const user = getUser();
+                authArea.innerHTML = ""; // clear content
 
-            // If user not logged in
-            if (!user.email || !user.password) {
-            authArea.innerHTML = `
+                // If user not logged in
+                if (!user.email || !user.password) {
+                    authArea.innerHTML = `
             <a href="login.html" class="os-btn border border-[#bc8246] text-[#bc8246] px-4 py-2 rounded hover:text-white hover:bg-[#bc8246] transition-all duration-300">
                 Login
             </a>
             `;
-            return;
-            }
+                    return;
+                }
 
-            // If user is logged in
-            const displayName = user.fname ? `${user.fname}` : "Account";
-            const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
+                // If user is logged in
+                const displayName = user.fname ? `${user.fname}` : "Account";
+                const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
 
-            authArea.innerHTML = `
+                authArea.innerHTML = `
             <div class="group relative inline-block">
                 <button class="flex items-center justify-center text-xl text-gray-700 hover:text-blue-600 focus:outline-none">
                 <i class="fal fa-user-circle"></i>
@@ -1076,26 +1099,26 @@
             </div>
             `;
 
-            // Attach logout functionality
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-            logoutBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                logout();
-            });
+                // Attach logout functionality
+                const logoutBtn = document.getElementById("logout-btn");
+                if (logoutBtn) {
+                    logoutBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
             }
-        }
 
-        // Helper: Logout
-        function logout() {
-            localStorage.setItem("userProfile", JSON.stringify({}));
-            window.location.href = "./login.html";
-        }
+            // Helper: Logout
+            function logout() {
+                localStorage.setItem("userProfile", JSON.stringify({}));
+                window.location.href = "./login.html";
+            }
 
-        // Initial render
-        renderAuthArea();
+            // Initial render
+            renderAuthArea();
         });
-    </script>
+    </script> -->
 
     <script>
         const sliders = document.querySelectorAll('.drag-scroll');
@@ -1131,7 +1154,7 @@
                 e.preventDefault();
 
                 const x = e.pageX - slider.offsetLeft;
-                const walk = (x - startX) * 2; 
+                const walk = (x - startX) * 2;
                 slider.scrollLeft = scrollLeft - walk;
             });
 
@@ -1141,7 +1164,7 @@
                 scrollLeft = slider.scrollLeft;
             }, {
                 passive: true
-            }); 
+            });
 
             slider.addEventListener('touchend', () => {
                 isDown = false;
@@ -1161,12 +1184,12 @@
 
     <script>
         /*!
-        * metismenu https://github.com/onokumus/metismenu#readme
-        * A jQuery menu plugin
-        * @version 3.0.6
-        * @author Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
-        * @license: MIT 
-        */
+         * metismenu https://github.com/onokumus/metismenu#readme
+         * A jQuery menu plugin
+         * @version 3.0.6
+         * @author Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
+         * @license: MIT 
+         */
         ! function (e, n) {
             "object" == typeof exports && "undefined" != typeof module ? module.exports = n(require("jquery")) :
                 "function" == typeof define && define.amd ? define(["jquery"], n) : (e = e || self).metisMenu = n(e
@@ -1367,11 +1390,11 @@
                     searchOverlay.classList.remove('search-opened');
                     // Check if mobile menu is also closed before removing overlay
                     if (mobileMenu && mobileMenu.classList.contains('hidden')) {
-                         if (bodyOverlay) bodyOverlay.classList.remove('opened');
+                        if (bodyOverlay) bodyOverlay.classList.remove('opened');
                     }
                 }
             }
-            
+
             // --- NEW MOBILE MENU TOGGLE FUNCTION ---
             function toggleMobileMenu(open) {
                 if (!mobileMenu) return;
@@ -1381,7 +1404,7 @@
                     if (bodyOverlay) bodyOverlay.classList.add('opened');
                 } else {
                     mobileMenu.classList.add('hidden');
-                     // Check if search is also closed before removing overlay
+                    // Check if search is also closed before removing overlay
                     if (searchOverlay && !searchOverlay.classList.contains('search-opened')) {
                         if (bodyOverlay) bodyOverlay.classList.remove('opened');
                     }
@@ -1409,16 +1432,16 @@
                 mobileMenuButton.addEventListener('click', (e) => {
                     e.preventDefault();
                     console.log("Mobile menu toggle triggered.");
-                    
+
                     // Close search overlay if it's open
-                    toggleSearch(false); 
-                    
+                    toggleSearch(false);
+
                     // Toggle the mobile menu
                     const isHidden = mobileMenu.classList.contains('hidden');
-                    toggleMobileMenu(isHidden); 
+                    toggleMobileMenu(isHidden);
                 });
             }
-            
+
             if (bodyOverlay) {
                 bodyOverlay.addEventListener('click', () => {
                     toggleSearch(false);
@@ -1427,7 +1450,8 @@
             }
 
             document.addEventListener('click', (e) => {
-                if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains('is-open')) {
+                if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList
+                    .contains('is-open')) {
                     miniCart.classList.remove('is-open');
                 }
             });
