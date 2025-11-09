@@ -230,8 +230,6 @@
             color: #fff !important;
         }
 
-        /* Override default os-btn:hover behavior for os-btn-2 */
-
 
         /* Search Overlay */
         .header__search {
@@ -275,23 +273,21 @@
         }
 
 
-        /* Force stacking order so mobile nav stays above everything else */
         #mobile-menu-2 {
             position: relative;
             z-index: 10010;
-            /* Above overlay (9998) and search (9999) */
+            
         }
 
-        /* Ensure overlay does not block menu clicks */
         .body-overlay {
             z-index: 9998;
             pointer-events: none;
-            /* Prevent blocking clicks */
+            
         }
 
         .body-overlay.opened {
             pointer-events: auto;
-            /* Only clickable for closing overlay */
+            
         }
 
         @media (max-width: 639px) {
@@ -311,7 +307,6 @@
 
         #header-search.search-opened {
             pointer-events: auto;
-            /* Allow interaction when visible */
             z-index: 9999;
         }
 
@@ -991,3 +986,4 @@
 </body>
 
 </html>
+
