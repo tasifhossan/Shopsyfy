@@ -106,15 +106,68 @@ function profileRender() {
     ).innerText = `${updatedData.fname} ${updatedData.lname}`;
     document.getElementById("profileEmailText").innerText = updatedData.email;
   });
-}
 
-document.getElementById("logout").addEventListener("click", (e) => {
-  logout();
-});
+  document.getElementById("logout").addEventListener("click", (e) => {
+    logout();
+  });
+  renderwishlist();
+}
 
 function logout() {
   userCredentials = {};
   localStorage.setItem("userProfile", JSON.stringify({}));
 
   window.location.href = "./login.html";
+}
+
+// Render wishlist
+async function renderwishlist() {
+  getwishlist();
+
+  let w = document.getElementById("wishlistItems");
+  w.innerHTML = "";
+  wishlist.map((item) => {
+    let t = `<div class="wishlist-card flex items-center justify-between bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
+  <!-- Product Info -->
+  <div class="flex items-center gap-4">
+    <img src="${item.image}" alt="Product Image" 
+         class="w-20 h-20 rounded-lg object-cover border border-gray-100">
+    <div>
+      <h4 class="text-[#323232] font-semibold text-sm md:text-base">${
+        item.title
+      }</h4>
+      <p class="text-[#bc8246] font-semibold mt-1">${item.price}</p>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="flex flex-col items-end gap-2">
+    <button class="addCartBtn os-btn bg-[#bc8246] text-white text-xs px-4 py-2 rounded-lg hover:bg-[#a96d38] transition" data-product='${JSON.stringify(
+      item
+    ).replace(/'/g, "&apos;")}'>
+      Add to Cart
+    </button>
+    <button data-title='${
+      item.title
+    }' class="removewishlist text-gray-400 hover:text-red-500 transition">
+      <i class="fa-solid fa-trash text-lg"></i>
+    </button>
+  </div>
+</div>
+`;
+    w.innerHTML += t;
+  });
+
+  document.querySelectorAll(".removewishlist").forEach((btn) => {
+    getwishlist();
+    btn.addEventListener("click", (e) => {
+      const title = e.currentTarget.dataset.title;
+      wishlist = wishlist.filter((item) => {
+        return item.title != title;
+      });
+
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      renderwishlist();
+    });
+  });
 }
