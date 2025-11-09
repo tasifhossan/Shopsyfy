@@ -85,7 +85,7 @@
             <!-- Sidebar -->
             <aside class="profile-card text-center flex flex-col items-center">
                 <div class="relative">
-                    <img id="profileAvatar" src="https://i.pravatar.cc/150?img=12"
+                    <img id="profileAvatar" src="https://cdn-icons-png.flaticon.com/512/6997/6997481.png"
                         class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-white" alt="User Avatar" />
                     <input id="uploadAvatar" type="file" accept="image/*" class="hidden" />
                     <label for="uploadAvatar"
@@ -93,8 +93,8 @@
                         <i class="fa-solid fa-camera text-xs"></i>
                     </label>
                 </div>
-                <h2 class="mt-5 text-2xl font-semibold text-[#323232]" id="profileNameText">John Doe</h2>
-                <p class="text-gray-500 text-sm" id="profileEmailText">johndoe@gmail.com</p>
+                <h2 class="mt-5 text-2xl font-semibold text-[#323232]" id="profileNameText">Mehe raj</h2>
+                <p class="text-gray-500 text-sm" id="profileEmailText">Tasif@gmail.com</p>
 
                 <div class="w-full mt-8 border-t border-gray-200 pt-6 text-left space-y-2">
                     <h3 class="text-[#323232] font-semibold mb-4">My Dashboard</h3>
@@ -130,15 +130,15 @@
                     <form id="accountForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-sm text-gray-500 mb-1">First Name</label>
-                            <input id="firstName" type="text" class="input-line" placeholder="John" />
+                            <input id="firstName" type="text" class="input-line" placeholder="Mehe" />
                         </div>
                         <div>
                             <label class="block text-sm text-gray-500 mb-1">Last Name</label>
-                            <input id="lastName" type="text" class="input-line" placeholder="Doe" />
+                            <input id="lastName" type="text" class="input-line" placeholder="Raj" />
                         </div>
                         <div>
                             <label class="block text-sm text-gray-500 mb-1">Email</label>
-                            <input id="email" type="email" class="input-line" placeholder="johndoe@gmail.com" />
+                            <input id="email" type="email" class="input-line" placeholder="Tasif@gmail.com" />
                         </div>
                         <div>
                             <label class="block text-sm text-gray-500 mb-1">Phone</label>
@@ -168,8 +168,8 @@
                         </div>
                         <div>
                             <label class="block text-sm text-gray-500 mb-1">Balance</label>
-                            <input id="balance" type="number" class="input-line bg-gray-100 cursor-not-allowed" value=""
-                                disabled />
+                            <input id="balance" type="number" class="input-line bg-gray-100 cursor-not-allowed"
+                                value="" />
                         </div>
                     </form>
                     <div class="text-center mt-8">
@@ -180,13 +180,17 @@
                 <!-- My Orders -->
                 <div id="section-orders" class="profile-card hidden">
                     <h3 class="profile-section-title">My Orders</h3>
-                    <div id="orderList" class="space-y-4"></div>
+                    <div id="orderList" class="space-y-4">
+                        Coming soon! This part isn’t ready yet — we ran out of time.
+                    </div>
                 </div>
 
                 <!-- Wishlist -->
                 <div id="section-wishlist" class="profile-card hidden">
                     <h3 class="profile-section-title">Wishlist</h3>
                     <div id="wishlistItems" class="space-y-4 text-gray-500">Your wishlist is currently empty.</div>
+
+
                 </div>
 
                 <!-- Payment Info -->
@@ -228,7 +232,9 @@
     <footer class="bg-[#323232] text-gray-400 py-8 mt-10 text-center">
         <p>© 2025 Shopsyfy — Designed by <span class="text-[#bc8246]">Meheraj & Tasif</span></p>
     </footer>
+    <script src="assets/js/wishlist.js"></script>
     <script src="assets/js/profile.js"></script>
+    <script src="assets/js/cartHandler.js"></script>
     <script>
         profileRender()
     </script>
