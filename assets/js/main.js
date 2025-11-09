@@ -24,7 +24,7 @@ function fillTrendingProd(prod) {
              <div class="sale__item">
                                 <div class="product__wrapper mb-16">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img block">
+                                        <a href="#" class="w-img block">
                                             <img src="${prod[i]["image1"]}"
                                                 alt="product-img" draggable="false">
                                             <img class="product__thumb-2"
@@ -32,10 +32,12 @@ function fillTrendingProd(prod) {
                                                 alt="product-img" draggable="false">
                                         </a>
                                         <div class="product__action transition-3">
-                                            <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                             <button href="#" data-bs-toggle="tooltip" data-placement="top" class='addtowishlist' data-product='${JSON.stringify(
+                                               p
+                                             ).replace(/'/g, "&apos;")}'
                                                 title="Add to Wishlist">
                                                 <i class="fal fa-heart"></i>
-                                            </a>
+                                            </button>
                                             <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Compare">
                                                 <i class="fal fa-sliders-h"></i>
                                             </a>
@@ -54,7 +56,7 @@ function fillTrendingProd(prod) {
                                     </div>
                                     <div class="product__content relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="product-details.html">${
+                                            <h4><a href="#">${
                                               prod[i]["title"]
                                             }</a></h4>
                                             <div class="product__price transition-3">
@@ -94,7 +96,7 @@ async function fillDatas() {
  <div class="sale__item flex-shrink-0 ">
                                 <div class="product__wrapper mb-16">
                                     <div class="product__thumb">
-                                        <a href="product-details.html" class="w-img block">
+                                        <a href="#" class="w-img block">
                                             <img src="${
                                               myContent["saleOffProducts"][i][
                                                 "image1"
@@ -110,10 +112,12 @@ async function fillDatas() {
                                                 alt="product-img" draggable="false">
                                         </a>
                                         <div class="product__action transition-3">
-                                            <a href="#" data-bs-toggle="tooltip" data-placement="top"
+                                            <button href="#" data-bs-toggle="tooltip" data-placement="top" class='addtowishlist' data-product='${JSON.stringify(
+                                              p
+                                            ).replace(/'/g, "&apos;")}'
                                                 title="Add to Wishlist">
                                                 <i class="fal fa-heart"></i>
-                                            </a>
+                                            </button>
                                             <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Compare">
                                                 <i class="fal fa-sliders-h"></i>
                                             </a>
@@ -136,7 +140,7 @@ async function fillDatas() {
                                     </div>
                                     <div class="product__content relative">
                                         <div class="product__content-inner">
-                                            <h4><a href="shop-details.html">${
+                                            <h4><a href="#">${
                                               myContent["saleOffProducts"][i][
                                                 "title"
                                               ]
@@ -174,20 +178,20 @@ async function fillDatas() {
 
             <div class="swiper-slide blog__item h-auto">
                               <div class="blog__thumb overflow-hidden w-full h-auto">
-                                  <a href="blog-details.html" class="w-img ">
+                                  <a href="#" class="w-img ">
                                       <img src="${myContent["blogPosts"][i]["image"]}" alt="${myContent["blogPosts"][i]["title"]}" draggable="false"
                                           class="w-full h-auto object-cover transition-transform duration-300 hover:scale-[1.05]">
                                   </a>
                               </div>
                               <div class="blog__content p-4 text-left">
-                                  <h4 class="text-lg font-semibold mb-2"><a href="blog-details.html"
+                                  <h4 class="text-lg font-semibold mb-2"><a href="#"
                                           class="text-gray-900 hover:text-bc8246 transition-colors">${myContent["blogPosts"][i]["title"]}</a></h4>
                                   <div class="blog__meta text-xs text-gray-500 mb-3">
                                       <span>By <a href="#" class="hover:text-bc8246">${myContent["blogPosts"][i]["author"]}</a></span>
                                       <span class="ml-3">${myContent["blogPosts"][i]["date"]}</span>
                                   </div>
                                   <p class="text-sm text-gray-600 mb-5">${myContent["blogPosts"][i]["excerpt"]}</p>
-                                  <a href="blog-details.html"
+                                  <a href="#"
                                       class="os-btn !w-auto bg-transparent border-gray-300 text-gray-900 hover:text-white hover:bg-bc8246 hover:border-bc8246">read
                                       more</a>
                               </div>
@@ -244,6 +248,9 @@ async function fillDatas() {
       prevEl: ".swiper-button-prev",
     },
     breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
       640: {
         slidesPerView: 2,
       },
@@ -252,64 +259,79 @@ async function fillDatas() {
       },
     },
   });
+
+  document.addEventListener("click", async (e) => {
+    // ADD to cart
+    const btn = e.target.closest(".addtowishlist");
+    if (btn) {
+      e.preventDefault();
+      const productData = btn.dataset.product;
+      if (!productData) return;
+
+      const product = JSON.parse(productData);
+
+      await getwishlist();
+      await setWishlist({
+        title: product.title,
+        image: product.image1,
+
+        price: product.price,
+      });
+
+      btn.textContent = "✓ Added";
+
+      return;
+    }
+  });
+
+  //Sorting Trending Producuts
+  const allTrendingProducts = [...myContent.trendingProducts];
+  let currentFilter = "default";
+  let currentSearch = "";
+
+  document.getElementById("sortSelect").addEventListener("change", (e) => {
+    currentFilter = e.target.value;
+    updateProductDisplay();
+  });
+
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    currentSearch = e.target.value.trim().toLowerCase();
+    updateProductDisplay();
+  });
+
+  function updateProductDisplay() {
+    // Start with the full, original product list
+    let processedProducts = [...allTrendingProducts];
+
+    // 1. Apply Search Filter (if any)
+    if (currentSearch !== "") {
+      processedProducts = processedProducts.filter((p) =>
+        p.title.toLowerCase().includes(currentSearch)
+      );
+    }
+
+    // 2. Apply Sorting (to the already-filtered list)
+    if (currentFilter === "priceLowHigh") {
+      processedProducts.sort((a, b) => {
+        return (
+          parseFloat(a.price.replace("$", "")) -
+          parseFloat(b.price.replace("$", ""))
+        );
+      });
+    } else if (currentFilter === "priceHighLow") {
+      processedProducts.sort((a, b) => {
+        return (
+          parseFloat(b.price.replace("$", "")) -
+          parseFloat(a.price.replace("$", ""))
+        );
+      });
+    } else if (currentFilter === "nameAZ") {
+      processedProducts.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (currentFilter === "nameZA") {
+      processedProducts.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
+    fillTrendingProd(processedProducts);
+  }
 }
 fillDatas();
-
-document.getElementById("sortSelect").addEventListener("change", (e) => {
-  console.log(e.target.value);
-  currentFilter = e.target.value;
-  filterTrending(e.target.value);
-});
-
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  const v = e.target.value.trim().toLowerCase();
-  console.log(v);
-  if (v === "") {
-    // If input is cleared → show all products
-    tmpProduction = [...myContent.trendingProducts];
-  } else {
-    // Filter by title text
-    tmpProduction = myContent.trendingProducts.filter((p) =>
-      p.title.toLowerCase().includes(v)
-    );
-  }
-
-  // ✅ Always re-render (for both typing and deleting)
-  filterTrending(currentFilter);
-});
-
-let tmpProduction;
-let currentFilter = "default";
-//priceLowHigh
-//priceHighLow
-//default
-//nameAZ
-//nameZA
-
-function filterTrending(val) {
-  let tmpProd = [...tmpProduction];
-  if (val === "priceLowHigh") {
-    tmpProd.sort((a, b) => {
-      return (
-        parseFloat(a.price.replace("$", "")) -
-        parseFloat(b.price.replace("$", ""))
-      );
-    });
-  } else if (val === "priceHighLow") {
-    tmpProd.sort((a, b) => {
-      return (
-        parseFloat(b.price.replace("$", "")) -
-        parseFloat(a.price.replace("$", ""))
-      );
-    });
-  } else if (val === "nameAZ") {
-    tmpProd.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (val === "nameZA") {
-    tmpProd.sort((a, b) => b.title.localeCompare(a.title));
-  } else {
-    fillTrendingProd(tmpProduction);
-    return;
-  }
-
-  fillTrendingProd(tmpProd);
-}
