@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/fontAwesome5Pro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -158,6 +158,7 @@
 
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
         body {
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
@@ -165,70 +166,152 @@
 
         /* Dropdown/Menu Animations */
         .main-menu .has-dropdown:hover>.submenu {
-            visibility: visible; opacity: 1; transform: scaleY(1);
+            visibility: visible;
+            opacity: 1;
+            transform: scaleY(1);
         }
+
         .submenu {
-            position: absolute; top: 100%; left: 0; background-color: white;
-            min-width: 200px; padding: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            opacity: 0; visibility: hidden; z-index: 10; transform: scaleY(0);
-            transform-origin: 0 0; transition: all 0.3s ease-out;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            padding: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 10;
+            transform: scaleY(0);
+            transform-origin: 0 0;
+            transition: all 0.3s ease-out;
         }
 
         /* Buttons */
-        .os-btn { position: relative; overflow: hidden; z-index: 1; transition: all 0.3s ease-out; }
-        .os-btn::after {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 0;
-            background-color: #bc8246; z-index: -1; transition: all 0.3s ease-out;
+        .os-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease-out;
         }
-        .os-btn:hover::after { height: 100%; }
-        .os-btn:hover { color: #fff !important; border-color: #bc8246; }
-        .os-btn-black { color: #fff; background-color: #323232; border-color: #323232; }
-        .os-btn-black:hover { border-color: #bc8246; }
-        .os-btn-2:hover { color: #fff !important; } /* Override default os-btn:hover behavior for os-btn-2 */
+
+        .os-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: #bc8246;
+            z-index: -1;
+            transition: all 0.3s ease-out;
+        }
+
+        .os-btn:hover::after {
+            height: 100%;
+        }
+
+        .os-btn:hover {
+            color: #fff !important;
+            border-color: #bc8246;
+        }
+
+        .os-btn-black {
+            color: #fff;
+            background-color: #323232;
+            border-color: #323232;
+        }
+
+        .os-btn-black:hover {
+            border-color: #bc8246;
+        }
+
+        .os-btn-2:hover {
+            color: #fff !important;
+        }
+
+        /* Override default os-btn:hover behavior for os-btn-2 */
 
 
         /* Search Overlay */
         .header__search {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 9999; opacity: 0; visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.785,0.135,0.15,0.86);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
             pointer-events: none;
         }
+
         .header__search.search-opened {
-            opacity: 1; visibility: visible; pointer-events: auto;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         /* Cart Dropdown */
-        .is-open { visibility: visible !important; opacity: 1 !important; transform: translateY(0) !important; }
+        .is-open {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
 
         /* Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f3f4f6; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
 
 
         /* Force stacking order so mobile nav stays above everything else */
         #mobile-menu-2 {
             position: relative;
-            z-index: 10010; /* Above overlay (9998) and search (9999) */
+            z-index: 10010;
+            /* Above overlay (9998) and search (9999) */
         }
 
         /* Ensure overlay does not block menu clicks */
         .body-overlay {
             z-index: 9998;
-            pointer-events: none; /* Prevent blocking clicks */
+            pointer-events: none;
+            /* Prevent blocking clicks */
         }
 
         .body-overlay.opened {
-            pointer-events: auto; /* Only clickable for closing overlay */
+            pointer-events: auto;
+            /* Only clickable for closing overlay */
+        }
+
+        @media (max-width: 639px) {
+            #mini-cart {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                width: 280px !important;
+            }
         }
 
         /* Fix search overlay interaction */
         #header-search {
-            pointer-events: none; /* Default: can’t block clicks */
+            pointer-events: none;
+            /* Default: can’t block clicks */
         }
+
         #header-search.search-opened {
-            pointer-events: auto; /* Allow interaction when visible */
+            pointer-events: auto;
+            /* Allow interaction when visible */
             z-index: 9999;
         }
 
@@ -243,7 +326,6 @@
 
 <body class="text-[14px] font-normal text-[#848b8a] leading-[24px]">
 
-    <!-- HEADER -->
     <header id="header-sticky" class="top-0 z-20">
         <nav class="bg-[#f5f5f5] border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4">
@@ -286,18 +368,19 @@
 
                             <div class="header__action ml-4 flex-shrink-0">
                                 <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
-                                    
+
                                     <li class="relative">
                                         <button type="button" id="search-toggle"
                                             class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                             <span class="hidden sm:inline">Search</span>
                                         </button>
                                     </li>
-                                    
+
                                     <li id="cart-dropdown-container" class="relative">
                                         <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
                                                 text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
@@ -345,7 +428,7 @@
                                                 <div
                                                     class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
                                                     <span class="text-323232">Total Balance:</span>
-                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+                                                    <span id="balance" class="text-323232 font-bold">$00.00</span>
 
                                                 </div>
 
@@ -361,12 +444,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <!-- ✅ Login/Profile Placeholder -->
+                                    <!--  Login/Profile Placeholder -->
                                     <li id="auth-area" class="relative"></li>
                                     <li class="relative lg:hidden">
                                         <button id="mobile-menu-button-2" type="button"
                                             class="mobile-menu-toggle text-444 inline-block pt-[27px] pb-[30px] hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 6h16M4 12h16M4 18h16" />
                                             </svg>
@@ -380,10 +464,14 @@
             </div>
             <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
                 <div class="px-4 py-3 space-y-2">
-                    <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
-                    <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
-                    <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
-                    <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+                    <a href="index.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
+                    <a href="index.html#shop"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
+                    <a href="index.html#reviews"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
+                    <a href="contact.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
                 </div>
             </div>
         </nav>
@@ -403,7 +491,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="flex justify-center space-x-2 text-white">
                                 <li class="breadcrumb-item"><a href="index.html"
-                                        class="text-323232 hover:text-bc8246">Home  </a></li>
+                                        class="text-323232 hover:text-bc8246">Home </a></li>
                                 <li class="text-gray-400">/</li>
                                 <li class="breadcrumb-item active text-bc8246" aria-current="page"> Contact</li>
                             </ol>
@@ -446,7 +534,9 @@
                                 </div>
                             </li>
                         </ul>
-                        <p>Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <p>Shopsyfy is your trusted online store for quality products at affordable prices. We’re
+                            dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer
+                            support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
 
                         <div class="contact__social">
                             <ul class="flex">
@@ -494,7 +584,10 @@
                 <div class="row gx-0">
                     <div class="col-xl-12">
                         <div class="contact__map-wrapper relative">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3102.8124928717616!2d91.8404442208849!3d22.35790680021136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad27656c600855%3A0xa4be32d307a83aee!2sBali%20Arcade!5e0!3m2!1sen!2sbd!4v1762625965790!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3102.8124928717616!2d91.8404442208849!3d22.35790680021136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad27656c600855%3A0xa4be32d307a83aee!2sBali%20Arcade!5e0!3m2!1sen!2sbd!4v1762625965790!5m2!1sen!2sbd"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -515,8 +608,7 @@
                                     offers and other discount information.</p>
                                 <div class="subscribe__form mt-5">
                                     <form action="#" class="flex flex-col !justify-center !align-middle gap-10">
-                                        <input
-                                            class="w-full p-2 border-b border-b-neutral-400 text-center outline-none"
+                                        <input class="w-full p-2 border-b border-b-neutral-400 text-center outline-none"
                                             type="email" placeholder="Subscribe to our newsletter...">
                                         <button
                                             class="os-btn os-btn-2  os-btn-3  !w-[200px] mx-auto bg-[#323232] text-white">subscribe</button>
@@ -528,8 +620,50 @@
                 </div>
             </div>
         </section>
-        
-        </main>
+
+
+        <!-- Developer Section -->
+        <section id="aboutus" class=" py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#323232] mb-12">Meet the Developers</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+
+
+
+
+                    <div
+                        class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition">
+                        <img src="https://avatars.githubusercontent.com/u/153765460?v=4" alt="Tasif"
+                            class="w-32 h-32 rounded-full object-cover mb-5 shadow-md">
+                        <h3 class="text-xl font-semibold text-[#323232] mb-2">Tasif Hossan</h3>
+                        <p class="text-[#6c6c6c] text-sm mb-3">B.Sc. in Computer Science & Engineering, IIUC</p>
+                        <p class="text-[#6c6c6c] text-sm mb-4">Specialized in Frontend Development & UI Design</p>
+                        <a href="https://github.com/tasifhossan" target="_blank"
+                            class="flex items-center gap-2 bg-[#323232] text-white px-5 py-2 rounded-full hover:bg-[#bc8246] transition">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition">
+                        <img src="https://avatars.githubusercontent.com/u/71807497?v=4" alt="Meheraj"
+                            class="w-32 h-32 rounded-full object-cover mb-5 shadow-md">
+                        <h3 class="text-xl font-semibold text-[#323232] mb-2">Meherajul Islam</h3>
+                        <p class="text-[#6c6c6c] text-sm mb-3">B.Sc. in Computer Science & Engineering, IIUC</p>
+                        <p class="text-[#6c6c6c] text-sm mb-4">Focused on Logic Development</p>
+                        <a href="https://github.com/meheraaj" target="_blank"
+                            class="flex items-center gap-2 bg-[#323232] text-white px-5 py-2 rounded-full hover:bg-[#bc8246] transition">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </main>
 
     <!-- FOOTER -->
     <section class="bg-gray-900 text-[#ffffffb6] font-extralight">
@@ -543,7 +677,10 @@
                         </a>
                     </div>
                     <div>
-                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at
+                            affordable prices. We’re dedicated to giving you a smooth shopping experience, fast
+                            delivery, and excellent customer support. Discover the latest trends and shop with
+                            confidence — anytime, anywhere.</p>
                         <div class="mt-6">
                             <ul class="space-y-4 inline-block text-left">
                                 <li class="flex items-start">
@@ -689,10 +826,11 @@
 
     <div class="body-overlay hidden"></div>
 
-    
+
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/cartHandler.js"></script>
     <script src="assets/js/profile.js"></script>
+
+    <script src="assets/js/cartHandler.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
@@ -710,51 +848,52 @@
             cartToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 toggleCart();
-                e.stopPropagation(); 
+                e.stopPropagation();
             });
         }
-        
+
         document.addEventListener('click', (e) => {
-            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains('is-open')) {
+            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains(
+                    'is-open')) {
                 miniCart.classList.remove('is-open');
             }
         });
 
         if (miniCart) {
             miniCart.addEventListener('click', (e) => {
-                   e.stopPropagation();
+                e.stopPropagation();
             });
         }
     </script>
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
-        const authArea = document.getElementById("auth-area");
+            const authArea = document.getElementById("auth-area");
 
-        // Helper: Get user data from localStorage
-        function getUser() {
-            return JSON.parse(localStorage.getItem("userProfile")) || {};
-        }
+            // Helper: Get user data from localStorage
+            function getUser() {
+                return JSON.parse(localStorage.getItem("userProfile")) || {};
+            }
 
-        // Helper: Render auth area based on login state
-        function renderAuthArea() {
-            const user = getUser();
-            authArea.innerHTML = ""; // clear content
+            // Helper: Render auth area based on login state
+            function renderAuthArea() {
+                const user = getUser();
+                authArea.innerHTML = ""; // clear content
 
-            // If user not logged in
-            if (!user.email || !user.password) {
-            authArea.innerHTML = `
+                // If user not logged in
+                if (!user.email || !user.password) {
+                    authArea.innerHTML = `
             <a href="login.html" class="os-btn border border-[#bc8246] text-[#bc8246] px-4 py-2 rounded hover:text-white hover:bg-[#bc8246] transition-all duration-300">
                 Login
             </a>
             `;
-            return;
-            }
+                    return;
+                }
 
-            // If user is logged in
-            const displayName = user.fname ? `${user.fname}` : "Account";
-            const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
+                // If user is logged in
+                const displayName = user.fname ? `${user.fname}` : "Account";
+                const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
 
-            authArea.innerHTML = `
+                authArea.innerHTML = `
             <div class="group relative inline-block">
                 <button class="flex items-center justify-center text-xl text-gray-700 hover:text-blue-600 focus:outline-none">
                 <i class="fal fa-user-circle"></i>
@@ -766,87 +905,87 @@
             </div>
             `;
 
-            // Attach logout functionality
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-            logoutBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                logout();
-            });
+                // Attach logout functionality
+                const logoutBtn = document.getElementById("logout-btn");
+                if (logoutBtn) {
+                    logoutBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
             }
-        }
 
-        // Helper: Logout
-        function logout() {
-            localStorage.setItem("userProfile", JSON.stringify({}));
-            window.location.href = "./login.html";
-        }
+            // Helper: Logout
+            function logout() {
+                localStorage.setItem("userProfile", JSON.stringify({}));
+                window.location.href = "./login.html";
+            }
 
-        // Initial render
-        renderAuthArea();
+            // Initial render
+            renderAuthArea();
         });
-    </script>
+    </script> -->
 
 
     <script>
-    (function ($) {
-        "use strict";
+        (function ($) {
+            "use strict";
 
-        function toggleOverlay(isOpen) {
-            if (isOpen) {
-                $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
-                $('.body-overlay').css('pointer-events', 'auto');
-                $('body').addClass('overflow-hidden');
-            } else {
-                const isSearchOpen = $("#header-search").hasClass('search-opened');
-                const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
-                if (!isSearchOpen && !isMobileMenuOpen) {
-                    $('body').removeClass('overflow-hidden');
-                    $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
-                    $('.body-overlay').css('pointer-events', 'none');
+            function toggleOverlay(isOpen) {
+                if (isOpen) {
+                    $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
+                    $('.body-overlay').css('pointer-events', 'auto');
+                    $('body').addClass('overflow-hidden');
+                } else {
+                    const isSearchOpen = $("#header-search").hasClass('search-opened');
+                    const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
+                    if (!isSearchOpen && !isMobileMenuOpen) {
+                        $('body').removeClass('overflow-hidden');
+                        $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
+                        $('.body-overlay').css('pointer-events', 'none');
+                    }
                 }
             }
-        }
 
-        const searchOpenClass = 'search-opened';
-        const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
+            const searchOpenClass = 'search-opened';
+            const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
 
-        // Search Toggle
-        $(".search-toggle").on("click", function (e) {
-            e.preventDefault();
-            $("#mobile-menu-2").addClass('hidden');
-            $("#header-search").addClass(searchOpenClass);
-            toggleOverlay(true);
-        });
-        $("#header__search-btn-close").on("click", function (e) {
-            e.preventDefault();
-            $("#header-search").removeClass(searchOpenClass);
-            toggleOverlay(false);
-        });
+            // Search Toggle
+            $(".search-toggle").on("click", function (e) {
+                e.preventDefault();
+                $("#mobile-menu-2").addClass('hidden');
+                $("#header-search").addClass(searchOpenClass);
+                toggleOverlay(true);
+            });
+            $("#header__search-btn-close").on("click", function (e) {
+                e.preventDefault();
+                $("#header-search").removeClass(searchOpenClass);
+                toggleOverlay(false);
+            });
 
-        // ✅ Mobile Menu Toggle
-        $("#mobile-menu-button-2").on("click", function (e) {
-            e.preventDefault();
-            $("#header-search").removeClass(searchOpenClass);
-            $("#mobile-menu-2").toggleClass('hidden');
-            if (!$("#mobile-menu-2").hasClass('hidden')) toggleOverlay(true);
-            else toggleOverlay(false);
-        });
+            // ✅ Mobile Menu Toggle
+            $("#mobile-menu-button-2").on("click", function (e) {
+                e.preventDefault();
+                $("#header-search").removeClass(searchOpenClass);
+                $("#mobile-menu-2").toggleClass('hidden');
+                if (!$("#mobile-menu-2").hasClass('hidden')) toggleOverlay(true);
+                else toggleOverlay(false);
+            });
 
-        // Overlay Click
-        $(".body-overlay").on("click", function () {
-            $("#header-search").removeClass(searchOpenClass);
-            $("#mobile-menu-2").addClass('hidden');
-            toggleOverlay(false);
-        });
+            // Overlay Click
+            $(".body-overlay").on("click", function () {
+                $("#header-search").removeClass(searchOpenClass);
+                $("#mobile-menu-2").addClass('hidden');
+                toggleOverlay(false);
+            });
 
-        // Sticky Header
-        $(window).on('scroll', function () {
-            var scroll = $(window).scrollTop();
-            if (scroll < 100) $("#header-sticky").removeClass(stickyClasses);
-            else $("#header-sticky").addClass(stickyClasses);
-        });
-    })(jQuery);
+            // Sticky Header
+            $(window).on('scroll', function () {
+                var scroll = $(window).scrollTop();
+                if (scroll < 100) $("#header-sticky").removeClass(stickyClasses);
+                else $("#header-sticky").addClass(stickyClasses);
+            });
+        })(jQuery);
     </script>
 
 </body>
