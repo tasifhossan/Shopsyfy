@@ -142,12 +142,22 @@
         main{
             @apply xl:px-[10%] 2xl:px-[15%]
         }
+        
     </style>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
         body {
             font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 639px) {
+            #mini-cart {
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                width: 280px !important;
+            }
         }
 
         #loading {
@@ -286,7 +296,8 @@
             color: #ffffff !important;
             border-color: #bc8246;
         }
-        .os-btn-black{
+
+        .os-btn-black {
             color: #ffffff;
             background-color: #323232;
             border-color: #323232;
@@ -407,13 +418,14 @@
         .banner__item:hover .banner__content {
             top: 60%;
         }
+
         .hero-slider-active {
-            position: relative; 
+            position: relative;
         }
 
         .hero-slider-active .hero-slider-pagination {
             position: absolute;
-            bottom: 20px !important; 
+            bottom: 20px !important;
             top: auto !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
@@ -422,6 +434,7 @@
             justify-content: center;
             z-index: 10;
         }
+
         .hero-slider-pagination .swiper-pagination-bullet {
             width: 13px;
             height: 13px;
@@ -469,6 +482,7 @@
             visibility: visible;
             pointer-events: auto;
         }
+
         .is-open {
             visibility: visible !important;
             opacity: 1 !important;
@@ -481,14 +495,17 @@
                 @apply max-h-[350px];
             }
         }
+
         /* Custom Scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #d1d5db;
             border-radius: 3px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f3f4f6;
         }
@@ -496,23 +513,24 @@
         /* Mobile Menu Z-Index Fixes */
         #mobile-menu-2 {
             position: relative;
-            z-index: 10010; 
+            z-index: 10010;
         }
 
         .body-overlay {
             z-index: 9998;
-            pointer-events: none; 
+            pointer-events: none;
         }
 
         .body-overlay.opened {
-            pointer-events: auto; 
+            pointer-events: auto;
         }
 
         #header-search {
-            pointer-events: none; 
+            pointer-events: none;
         }
+
         #header-search.search-opened {
-            pointer-events: auto; 
+            pointer-events: auto;
             z-index: 9999;
         }
 
@@ -579,57 +597,71 @@
 
                             <div class="header__action ml-4 flex-shrink-0">
                                 <ul class="flex items-center space-x-4 md:space-x-6 list-none p-0 m-0">
-                                    
+
                                     <li class="relative">
                                         <button type="button" id="search-toggle"
                                             class="search-toggle text-444 inline-block pt-[27px] pb-[30px] relative hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                             <span class="hidden sm:inline">Search</span>
                                         </button>
                                     </li>
-                                    
+
                                     <li id="cart-dropdown-container" class="relative">
                                         <a href="javascript:void(0);" id="cart-toggle" class="cart inline-block relative cursor-pointer transition-colors duration-300 
                                                 text-444 hover:text-bc8246 pt-[27px] pb-[30px]">
 
+                                            <!-- SVG Icon (Shopping Bag) -->
                                             <svg class="h-5 w-5 inline-block text-323232 mr-[3px]" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>
 
+                                            <!-- Cart Text (Hidden on default/xs, shown on sm+) -->
                                             <span class="hidden sm:inline">Cart</span>
 
+                                            <!-- Cart Count Text (Using simple text count (03)) -->
                                             <span id="cart-count" class="text-sm ml-1">( 0 )</span>
                                         </a>
 
-                                        <div id="mini-cart" class="mini-cart-dropdown absolute top-full z-50 p-6 w-[350px] bg-white border border-gray-200 rounded-xl shadow-2xl transition-all duration-300 invisible opacity-0 translate-y-2 
-                                            
-                                            /* Mobile Positioning: Center on small screens (max-sm:), push to right on sm+ */
-                                            max-sm:w-[280px] max-sm:right-1/2 max-sm:transform max-sm:translate-x-1/2
-                                            sm:right-0 sm:translate-x-0
-                                        ">
+                                        <!-- Mini-Cart Dropdown Content -->
+                                         <div
+                                            id="mini-cart"
+                                            class="mini-cart-dropdown absolute top-full z-50 p-6 bg-white border border-gray-200 rounded-xl shadow-2xl transition-all duration-300 invisible opacity-0 translate-y-2
+                                                w-[280px] left-1/2 -translate-x-1/2
+                                                sm:w-[350px] sm:left-auto sm:right-0 sm:translate-x-0
+                                            ">
                                             <div class="mini-cart-inner">
 
+                                                <!-- List of Items (Scrollable Area) -->
                                                 <ul id="cart"
                                                     class="mini-cart-list overflow-y-scroll custom-scrollbar cart-list-scroll space-y-7">
+
+
+
                                                 </ul>
 
+                                                <!-- Total Price -->
                                                 <div
                                                     class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
                                                     <span class="text-323232">Subtotal:</span>
                                                     <span id="subtotal_header"
                                                         class="text-323232 font-bold">$00.00</span>
+
                                                 </div>
+                                                <!-- Current Balance -->
                                                 <div
                                                     class="flex justify-between items-center pt-5 mt-5 border-t border-gray-900 mb-6 font-medium text-lg">
                                                     <span class="text-323232">Total Balance:</span>
-                                                    <span id="balance" class="text-323232 font-bold">$1000.00</span>
+                                                    <span id="balance" class="text-323232 font-bold">$00.00</span>
+
                                                 </div>
 
+                                                <!-- Checkout Links -->
                                                 <div class="checkout-link space-y-3">
                                                     <a href="cart.html"
                                                         class="os-btn block w-full text-center py-3 rounded-full text-white bg-8a8f6a font-medium transition hover:bg-opacity-90 shadow-lg">View
@@ -641,11 +673,13 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <!-- ✅ Login/Profile Placeholder -->
                                     <li id="auth-area" class="relative"></li>
                                     <li class="relative lg:hidden">
                                         <button id="mobile-menu-button-2" type="button"
                                             class="mobile-menu-toggle text-444 inline-block pt-[27px] pb-[30px] hover:text-bc8246 transition-colors duration-300">
-                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-6 w-6 text-323232" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 6h16M4 12h16M4 18h16" />
                                             </svg>
@@ -659,10 +693,14 @@
             </div>
             <div id="mobile-menu-2" class="hidden lg:hidden bg-white border-t border-gray-200">
                 <div class="px-4 py-3 space-y-2">
-                    <a href="index.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</a>
-                    <a href="index.html#shop" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</a>
-                    <a href="index.html#reviews" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</a>
-                    <a href="contact.html" class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
+                    <button href="index.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Home</button>
+                    <button href="index.html#shop"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Shop</button>
+                    <button href="index.html#reviews"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Reviews</button>
+                    <a href="contact.html"
+                        class="block text-[#444] hover:text-[#bc8246] text-sm font-medium">Contact</a>
                 </div>
             </div>
         </nav>
@@ -684,7 +722,8 @@
                                             Bring Warmth <br> to Every Corner
                                         </h2>
                                         <p class="mb-11 text-lg text-[#323232]">
-                                            Discover handcrafted home decor inspired by natural textures and clean design.
+                                            Discover handcrafted home decor inspired by natural textures and clean
+                                            design.
                                         </p>
                                         <a href="#shop" class="os-btn os-btn-2 bg-[#323232] text-white">
                                             Shop Home Decor
@@ -702,7 +741,8 @@
                             <div class="flex flex-wrap">
                                 <div class="w-full sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
                                     <div class="slider__content">
-                                        <h2 class="text-5xl md:text-6xl font-semibold leading-tight text-[#323232] mb-4">
+                                        <h2
+                                            class="text-5xl md:text-6xl font-semibold leading-tight text-[#323232] mb-4">
                                             Light Up <br> Your Workspace
                                         </h2>
                                         <p class="mb-11 text-lg text-[#323232]">
@@ -749,68 +789,68 @@
         </div>
 
     </section>
-<div class="banner__area">
-    <div class="container mx-auto px-4">
-        <div class="relative z-10 bg-white p-5 md:p-7 mt-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="banner__area">
+        <div class="container mx-auto px-4">
+            <div class="relative z-10 bg-white p-5 md:p-7 mt-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <div class="banner__item mb-8 relative overflow-hidden group">
-                    <div class="banner__thumb fix overflow-hidden rounded-lg">
-                        <a href="#shop" class="block w-full">
-                            <img src="assets/img/shop/banner/banner-sm-1.jpg" alt="banner"
-                                class="w-full object-cover">
-                        </a>
-                    </div>
-                    <div class="banner__content absolute left-[10%] transition-all duration-300">
-                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                    <div class="banner__item mb-8 relative overflow-hidden group">
+                        <div class="banner__thumb fix overflow-hidden rounded-lg">
+                            <a href="#shop" class="block w-full">
+                                <img src="assets/img/shop/banner/banner-sm-1.jpg" alt="banner"
+                                    class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="banner__content absolute left-[10%] transition-all duration-300">
+                            <h5 class="text-xl font-semibold leading-snug mb-4">
+                                <a href="#shop" class="text-gray-900 hover:text-bc8246 transition-colors">Bring Timeless
+                                    <br> Style Home</a>
+                            </h5>
                             <a href="#shop"
-                                class="text-gray-900 hover:text-bc8246 transition-colors">Bring Timeless <br> Style Home</a>
-                        </h5>
-                        <a href="#shop"
-                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
-                            now</a>
+                                class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                                now</a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="banner__item mb-8 relative overflow-hidden group">
-                    <div class="banner__thumb fix overflow-hidden rounded-lg">
-                        <a href="#shop" class="block w-full">
-                            <img src="assets/img/shop/banner/banner-sm-2.jpg" alt="banner"
-                                class="w-full object-cover">
-                        </a>
-                    </div>
-                    <div class="banner__content absolute left-[10%] transition-all duration-300">
-                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                    <div class="banner__item mb-8 relative overflow-hidden group">
+                        <div class="banner__thumb fix overflow-hidden rounded-lg">
+                            <a href="#shop" class="block w-full">
+                                <img src="assets/img/shop/banner/banner-sm-2.jpg" alt="banner"
+                                    class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="banner__content absolute left-[10%] transition-all duration-300">
+                            <h5 class="text-xl font-semibold leading-snug mb-4">
+                                <a href="#shop" class="text-gray-900 hover:text-bc8246 transition-colors">Crafted
+                                    Comfort <br> for Living</a>
+                            </h5>
                             <a href="#shop"
-                                class="text-gray-900 hover:text-bc8246 transition-colors">Crafted Comfort <br> for Living</a>
-                        </h5>
-                        <a href="#shop"
-                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
-                            now</a>
+                                class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                                now</a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="banner__item mb-8 relative overflow-hidden group">
-                    <div class="banner__thumb fix overflow-hidden rounded-lg">
-                        <a href="#shop" class="block w-full">
-                            <img src="assets/img/shop/banner/banner-sm-3.jpg" alt="banner"
-                                class="w-full object-cover">
-                        </a>
-                    </div>
-                    <div class="banner__content absolute left-[10%] transition-all duration-300">
-                        <h5 class="text-xl font-semibold leading-snug mb-4">
+                    <div class="banner__item mb-8 relative overflow-hidden group">
+                        <div class="banner__thumb fix overflow-hidden rounded-lg">
+                            <a href="#shop" class="block w-full">
+                                <img src="assets/img/shop/banner/banner-sm-3.jpg" alt="banner"
+                                    class="w-full object-cover">
+                            </a>
+                        </div>
+                        <div class="banner__content absolute left-[10%] transition-all duration-300">
+                            <h5 class="text-xl font-semibold leading-snug mb-4">
+                                <a href="#shop" class="text-gray-900 hover:text-bc8246 transition-colors">Beautiful
+                                    Tools <br> for Everyday</a>
+                            </h5>
                             <a href="#shop"
-                                class="text-gray-900 hover:text-bc8246 transition-colors">Beautiful Tools <br> for Everyday</a>
-                        </h5>
-                        <a href="#shop"
-                            class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
-                            now</a>
+                                class="link-btn text-sm font-medium text-bc8246 hover:text-gray-700 transition-colors">Shop
+                                now</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <main>
 
 
@@ -924,7 +964,7 @@
 
                 <div class="swiper review-swiper w-full overflow-hidden">
                     <div id="reviewItems" class="swiper-wrapper">
-                        
+
                         <div class="swiper-slide h-auto">
                             <div class="review-card h-full bg-white p-8 rounded-xl border border-gray-200">
                                 <div class="flex mb-4">
@@ -934,7 +974,9 @@
                                     <span class="star text-xl">&#9733;</span>
                                     <span class="star text-xl">&#9733;</span>
                                 </div>
-                                <p class="text-gray-700 italic mb-4">"Absolutely stunning quality! The delivery was fast, and the packaging was excellent. Highly recommend for unique, well-crafted pieces."</p>
+                                <p class="text-gray-700 italic mb-4">"Absolutely stunning quality! The delivery was
+                                    fast, and the packaging was excellent. Highly recommend for unique, well-crafted
+                                    pieces."</p>
                                 <div class="font-bold text-gray-900">- Sarah J.</div>
                                 <div class="text-sm text-gray-500">Los Angeles, CA</div>
                             </div>
@@ -949,7 +991,8 @@
                                     <span class="star text-xl">&#9733;</span>
                                     <span class="star text-xl">&#9733;</span>
                                 </div>
-                                <p class="text-gray-700 italic mb-4">"The customer service was exceptional when I had a question about assembly. The Chair Kimi No Isu is even better in person."</p>
+                                <p class="text-gray-700 italic mb-4">"The customer service was exceptional when I had a
+                                    question about assembly. The Chair Kimi No Isu is even better in person."</p>
                                 <div class="font-bold text-gray-900">- Mark D.</div>
                                 <div class="text-sm text-gray-500">New York, NY</div>
                             </div>
@@ -964,7 +1007,9 @@
                                     <span class="star text-xl">&#9733;</span>
                                     <span class="star text-xl">&#9733;</span>
                                 </div>
-                                <p class="text-gray-700 italic mb-4">"I've been looking for unique home decor and this shop delivered. The Sunflower Clock is a fantastic addition to my living room. Five stars!"</p>
+                                <p class="text-gray-700 italic mb-4">"I've been looking for unique home decor and this
+                                    shop delivered. The Sunflower Clock is a fantastic addition to my living room. Five
+                                    stars!"</p>
                                 <div class="font-bold text-gray-900">- Jennifer L.</div>
                                 <div class="text-sm text-gray-500">Chicago, IL</div>
                             </div>
@@ -979,12 +1024,13 @@
                                     <span class="star text-xl">&#9733;</span>
                                     <span class="star text-xl">&#9734;</span>
                                 </div>
-                                <p class="text-gray-700 italic mb-4">"Great selection and fast shipping, though one item arrived slightly later than expected. Overall, a very positive experience!"</p>
+                                <p class="text-gray-700 italic mb-4">"Great selection and fast shipping, though one item
+                                    arrived slightly later than expected. Overall, a very positive experience!"</p>
                                 <div class="font-bold text-gray-900">- Alex T.</div>
                                 <div class="text-sm text-gray-500">Seattle, WA</div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="review-pagination swiper-pagination mt-8 relative !bottom-0"></div>
@@ -1033,8 +1079,7 @@
                                     offers and other discount information.</p>
                                 <div class="subscribe__form mt-5">
                                     <form action="#" class="flex flex-col !justify-center !align-middle gap-10">
-                                        <input
-                                            class="w-full p-2 border-b border-b-neutral-400 text-center outline-none"
+                                        <input class="w-full p-2 border-b border-b-neutral-400 text-center outline-none"
                                             type="email" placeholder="Subscribe to our newsletter...">
                                         <button
                                             class="os-btn os-btn-2 os-btn-3 !w-[200px] mx-auto bg-[#323232] text-white">subscribe</button>
@@ -1061,7 +1106,10 @@
                         </a>
                     </div>
                     <div>
-                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at affordable prices. We’re dedicated to giving you a smooth shopping experience, fast delivery, and excellent customer support. Discover the latest trends and shop with confidence — anytime, anywhere.</p>
+                        <p class="leading-relaxed">Shopsyfy is your trusted online store for quality products at
+                            affordable prices. We’re dedicated to giving you a smooth shopping experience, fast
+                            delivery, and excellent customer support. Discover the latest trends and shop with
+                            confidence — anytime, anywhere.</p>
                         <div class="mt-6">
                             <ul class="space-y-4 inline-block text-left">
                                 <li class="flex items-start">
@@ -1099,7 +1147,8 @@
                     </div>
                     <div>
                         <ul class="space-y-2">
-                            <li><a href="#" class="hover:text-white hover:underline">About Us</a></li>
+                            <li><a href="contact.html#aboutus" class="hover:text-white hover:underline">About Us</a>
+                            </li>
                             <li><a href="#" class="hover:text-white hover:underline">Careers</a></li>
                             <li><a href="#" class="hover:text-white hover:underline">Delivery Information</a></li>
                             <li><a href="#" class="hover:text-white hover:underline">Privacy Policy</a></li>
@@ -1142,15 +1191,15 @@
                     <div>
                         <ul class="flex space-x-5">
                             <li><a href="#" class="text-gray-400 hover:text-white"><i
-                                            class="fab fa-dribbble text-lg"></i></a></li>
+                                        class="fab fa-dribbble text-lg"></i></a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white"><i
-                                            class="fab fa-facebook-f text-lg"></i></a></li>
+                                        class="fab fa-facebook-f text-lg"></i></a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white"><i
-                                            class="fab fa-twitter text-lg"></i></a></li>
+                                        class="fab fa-twitter text-lg"></i></a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white"><i
-                                            class="fab fa-behance text-lg"></i></a></li>
+                                        class="fab fa-behance text-lg"></i></a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white"><i
-                                            class="fas fa-share-alt text-lg"></i></a></li>
+                                        class="fas fa-share-alt text-lg"></i></a></li>
                         </ul>
                     </div>
 
@@ -1213,15 +1262,18 @@
     </div>
 
 
+    <script src="assets/js/wishlist.js"></script>
     <script src="assets/js/profile.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/cartHandler.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const cartToggle = document.getElementById('cart-toggle');
         const miniCart = document.getElementById('mini-cart');
         const cartContainer = document.getElementById('cart-dropdown-container');
-        
+
         const searchToggle = document.getElementById('search-toggle');
         const mobileMenuButton = document.getElementById('mobile-menu-button-2');
 
@@ -1235,7 +1287,7 @@
             cartToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 toggleCart();
-                e.stopPropagation(); 
+                e.stopPropagation();
             });
         }
 
@@ -1245,7 +1297,7 @@
                 console.log("Search functionality triggered.");
             });
         }
-        
+
         if (mobileMenuButton) {
             mobileMenuButton.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1254,47 +1306,46 @@
         }
 
         document.addEventListener('click', (e) => {
-            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains('is-open')) {
+            if (cartContainer && miniCart && !cartContainer.contains(e.target) && miniCart.classList.contains(
+                    'is-open')) {
                 miniCart.classList.remove('is-open');
             }
         });
 
         if (miniCart) {
             miniCart.addEventListener('click', (e) => {
-                   e.stopPropagation();
+                e.stopPropagation();
             });
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
-    <script>
+
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
-        const authArea = document.getElementById("auth-area");
+            const authArea = document.getElementById("auth-area");
 
-        function getUser() {
-            return JSON.parse(localStorage.getItem("userProfile")) || {};
-        }
+            function getUser() {
+                return JSON.parse(localStorage.getItem("userProfile")) || {};
+            }
 
-        function renderAuthArea() {
-            const user = getUser();
-            authArea.innerHTML = ""; 
+            function renderAuthArea() {
+                const user = getUser();
+                authArea.innerHTML = "";
 
-            if (!user.email || !user.password) {
-            authArea.innerHTML = `
+                if (!user.email || !user.password) {
+                    authArea.innerHTML = `
             <a href="login.html" class="os-btn border border-[#bc8246] text-[#bc8246] px-4 py-2 rounded hover:text-white hover:bg-[#bc8246] transition-all duration-300">
                 Login
             </a>
             `;
-            return;
-            }
+                    return;
+                }
 
-            const displayName = user.fname ? `${user.fname}` : "Account";
-            const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
+                const displayName = user.fname ? `${user.fname}` : "Account";
+                const avatarSrc = user.avatar || "./assets/img/default-avatar.png";
 
-            authArea.innerHTML = `
+                authArea.innerHTML = `
             <div class="relative group">
                 <button class="flex items-center space-x-2 pt-[27px] pb-[30px] hover:text-[#bc8246]">
                     <svg class="w-6 h-6 text-[#323232]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1311,23 +1362,23 @@
             </div>
             `;
 
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-            logoutBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                logout();
-            });
+                const logoutBtn = document.getElementById("logout-btn");
+                if (logoutBtn) {
+                    logoutBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        logout();
+                    });
+                }
             }
-        }
 
-        function logout() {
-            localStorage.setItem("userProfile", JSON.stringify({}));
-            window.location.href = "./login.html";
-        }
+            function logout() {
+                localStorage.setItem("userProfile", JSON.stringify({}));
+                window.location.href = "./login.html";
+            }
 
-        renderAuthArea();
+            renderAuthArea();
         });
-    </script>
+    </script> -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const reviewSwiper = new Swiper('.review-swiper', {
@@ -1496,7 +1547,7 @@
                 scrollLeft = slider.scrollLeft;
             }, {
                 passive: true
-            }); 
+            });
 
             slider.addEventListener('touchend', () => {
                 isDown = false;
@@ -1515,114 +1566,114 @@
     </script>
 
 
-<script>
-    (function ($) {
-        "use strict";
+    <script>
+        (function ($) {
+            "use strict";
 
-        function toggleOverlay(isOpen) {
-            if (isOpen) {
-                $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
-                $('.body-overlay').css('pointer-events', 'auto');
-                $('body').addClass('overflow-hidden');
-            } else {
-                const isSearchOpen = $("#header-search").hasClass('search-opened');
-                const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
-                if (!isSearchOpen && !isMobileMenuOpen) {
-                    $('body').removeClass('overflow-hidden');
-                    $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
-                    $('.body-overlay').css('pointer-events', 'none');
+            function toggleOverlay(isOpen) {
+                if (isOpen) {
+                    $('.body-overlay').addClass('opened').removeClass('hidden').addClass('opacity-100');
+                    $('.body-overlay').css('pointer-events', 'auto');
+                    $('body').addClass('overflow-hidden');
+                } else {
+                    const isSearchOpen = $("#header-search").hasClass('search-opened');
+                    const isMobileMenuOpen = !$("#mobile-menu-2").hasClass('hidden');
+                    if (!isSearchOpen && !isMobileMenuOpen) {
+                        $('body').removeClass('overflow-hidden');
+                        $('.body-overlay').removeClass('opened').addClass('hidden').removeClass('opacity-100');
+                        $('.body-overlay').css('pointer-events', 'none');
+                    }
                 }
             }
-        }
 
-        const searchOpenClass = 'search-opened';
-        const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
+            const searchOpenClass = 'search-opened';
+            const stickyClasses = 'fixed top-0 w-full z-[999] shadow-xl bg-white transition-all duration-300';
 
-        // Search Toggle
-        $(".search-toggle").on("click", function (e) {
-            e.preventDefault();
-            $("#mobile-menu-2").addClass('hidden');
-            $("#header-search").addClass(searchOpenClass);
-            toggleOverlay(true);
-            $('#header-search input[type="text"]').focus();
-        });
-        $("#header__search-btn-close").on("click", function (e) {
-            e.preventDefault();
-            $("#header-search").removeClass(searchOpenClass);
-            toggleOverlay(false);
-        });
-
-        // Mobile Menu Toggle
-        $(".mobile-menu-toggle").on("click", function (e) {
-            e.preventDefault();
-            $("#header-search").removeClass(searchOpenClass);
-            $("#mobile-menu-2").toggleClass('hidden');
-            if (!$("#mobile-menu-2").hasClass('hidden')) {
+            // Search Toggle
+            $(".search-toggle").on("click", function (e) {
+                e.preventDefault();
+                $("#mobile-menu-2").addClass('hidden');
+                $("#header-search").addClass(searchOpenClass);
                 toggleOverlay(true);
-            } else {
-                if (!$("#header-search").hasClass(searchOpenClass)) {
-                    toggleOverlay(false);
+                $('#header-search input[type="text"]').focus();
+            });
+            $("#header__search-btn-close").on("click", function (e) {
+                e.preventDefault();
+                $("#header-search").removeClass(searchOpenClass);
+                toggleOverlay(false);
+            });
+
+            // Mobile Menu Toggle
+            $(".mobile-menu-toggle").on("click", function (e) {
+                e.preventDefault();
+                $("#header-search").removeClass(searchOpenClass);
+                $("#mobile-menu-2").toggleClass('hidden');
+                if (!$("#mobile-menu-2").hasClass('hidden')) {
+                    toggleOverlay(true);
+                } else {
+                    if (!$("#header-search").hasClass(searchOpenClass)) {
+                        toggleOverlay(false);
+                    }
                 }
-            }
-        });
+            });
 
-        // Overlay Click
-        $(".body-overlay").on("click", function () {
-            $("#header-search").removeClass(searchOpenClass);
-            $("#mobile-menu-2").addClass('hidden');
-            toggleOverlay(false);
-        });
+            // Overlay Click
+            $(".body-overlay").on("click", function () {
+                $("#header-search").removeClass(searchOpenClass);
+                $("#mobile-menu-2").addClass('hidden');
+                toggleOverlay(false);
+            });
 
-        // Sticky Header
-        $(window).on('scroll', function () {
-            var scroll = $(window).scrollTop();
-            if (scroll < 100) {
-                $("#header-sticky").removeClass(stickyClasses);
-            } else {
-                $("#header-sticky").addClass(stickyClasses);
-            }
-        });
+            // Sticky Header
+            $(window).on('scroll', function () {
+                var scroll = $(window).scrollTop();
+                if (scroll < 100) {
+                    $("#header-sticky").removeClass(stickyClasses);
+                } else {
+                    $("#header-sticky").addClass(stickyClasses);
+                }
+            });
 
-        // Loading Animation
-        $(window).on('load', function () {
-            $("#loading").fadeOut(500);
-        });
-        $(document).ready(function () {
-            if ($("#loading").is(':visible')) {
-                $("#loading").delay(100).fadeOut(500);
-            }
-        });
+            // Loading Animation
+            $(window).on('load', function () {
+                $("#loading").fadeOut(500);
+            });
+            $(document).ready(function () {
+                if ($("#loading").is(':visible')) {
+                    $("#loading").delay(100).fadeOut(500);
+                }
+            });
 
-        // Scroll to Top Button
-        $(window).on('scroll', function () {
-            if ($(this).scrollTop() > 600) {
-                $('#scroll').fadeIn(200);
-            } else {
-                $('#scroll').fadeOut(200);
-            }
-        });
-        $('#scroll').on('click', function (event) {
-            event.preventDefault();
-            $('html, body').animate({
-                scrollTop: 0,
-            }, 600);
-        });
+            // Scroll to Top Button
+            $(window).on('scroll', function () {
+                if ($(this).scrollTop() > 600) {
+                    $('#scroll').fadeIn(200);
+                } else {
+                    $('#scroll').fadeOut(200);
+                }
+            });
+            $('#scroll').on('click', function (event) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: 0,
+                }, 600);
+            });
 
-        // Background Images
-        $("[data-background]").each(function () {
-            $(this).css("background-image", "url( " + $(this).attr("data-background") + " )");
-        });
+            // Background Images
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url( " + $(this).attr("data-background") + " )");
+            });
 
-        // Mobile Menu MetisMenu (if it's needed)
-        $(document).ready(function () {
-            const $mobileMenu = $('#mobile-menu-active');
-            if ($mobileMenu.length) {
-                $mobileMenu.metisMenu();
-            }
-        });
+            // Mobile Menu MetisMenu (if it's needed)
+            $(document).ready(function () {
+                const $mobileMenu = $('#mobile-menu-active');
+                if ($mobileMenu.length) {
+                    $mobileMenu.metisMenu();
+                }
+            });
 
-    })(jQuery);
-</script>
+        })(jQuery);
+    </script>
 
 </body>
 
